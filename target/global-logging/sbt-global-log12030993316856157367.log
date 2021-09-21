@@ -1,0 +1,20 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(runGameFull, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(;compile;fullOptJS;indigoRunFull, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(compile, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / compile[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0mdebug[0m] [0m[0mGlobal IR cache stats: reused: 0 -- invalidated: 0 -- trees read: 0[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 0 s, completed 21 set 2021, 15:33:51[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(fullOptJS, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / fullOptJS[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mFull optimizing /Users/federicomazzini/Documents/uni/paradigmi-programmazione/code/random_source/indigoTest/target/scala-3.0.2/indigotest-opt[0m
+[0m[[0m[0minfo[0m] [0m[0mClosure: 0 error(s), 0 warning(s)[0m
+[0m[[0m[0mdebug[0m] [0m[0mGlobal IR cache stats: reused: 16 -- invalidated: 0 -- trees read: 0[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 19 s, completed 21 set 2021, 15:34:11[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(indigoRunFull, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: indigoRunFull[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0mdebug[0m] [0m[0mGlobal IR cache stats: reused: 0 -- invalidated: 0 -- trees read: 0[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 15 s, completed 21 set 2021, 15:34:26[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(idea-shell, None, None)[0m

@@ -1,0 +1,26 @@
+[0m[[0m[0minfo[0m] [0m[0mFull optimizing /Users/federicomazzini/Documents/uni/paradigmi-programmazione/code/random_source/indigoTest/target/scala-3.0.2/indigotest-opt[0m
+[0m[[0m[0mdebug[0m] [0m[0mLinker: Compute reachability: 442044 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mLinker: Assemble LinkedClasses: 94918 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mLinker: Check IR: 654684 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mLinker: 1221882 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: Batch mode: true[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: Incremental part: 183299 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: Optimizing 9376 methods.[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: Optimizer part: 1311053 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: 1501977 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mRefiner: Compute reachability: 102326 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mRefiner: Assemble LinkedClasses: 9672 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mRefiner: 123091 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mModule Splitter: Calculate Dependency Info: 1797 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mModule Splitter: Analyze Modules: 361 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mModule Splitter: Assemble Modules: 5400 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mModule Splitter: 8098 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: Generate Classes: 585435 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: Write trees: 13163 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: Class tree cache stats: reused: 0 -- invalidated: 1205[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: Method tree cache stats: reused: 0 -- invalidated: 5035[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: 620738 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mClosure: Create trees): 754417 us[0m
+[0m[[0m[0minfo[0m] [0m[0mClosure: 0 error(s), 0 warning(s)[0m
+[0m[[0m[0mdebug[0m] [0m[0mClosure: Compiler pass: 14606031 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mClosure: Write result: 266323 us[0m
