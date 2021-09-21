@@ -1,6 +1,3 @@
-
-
-
 lazy val indigoTest =
   (project in file("."))
     .enablePlugins(ScalaJSPlugin, SbtIndigo) // Enable the Scala.js and Indigo plugins
@@ -21,3 +18,8 @@ lazy val indigoTest =
         "io.indigoengine" %%% "indigo-json-circe" % "0.9.2",
       )
     )
+
+addCommandAlias("buildGame", ";compile;fastOptJS;indigoBuild")
+addCommandAlias("runGame", ";compile;fastOptJS;indigoRun")
+addCommandAlias("buildGameFull", ";compile;fullOptJS;indigoBuildFull")
+addCommandAlias("runGameFull", ";compile;fullOptJS;indigoRunFull")
