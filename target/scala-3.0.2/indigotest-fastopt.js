@@ -1846,7 +1846,7 @@ $c_Lindigo_gameengine_GameLoop.prototype.loop__J__F1 = (function(lastUpdateTime)
           while ((!these$1.isEmpty__Z())) {
             var arg1$1 = these$1.head__O();
             var layer = $as_Lindigo_shared_scenegraph_Layer(arg1$1);
-            $m_Lindigo_shared_scenegraph_SceneGraphViewEvents$().collectViewEvents__Lindigo_shared_BoundaryLocator__sci_List__sci_List__F1__V(this$1.Lindigo_gameengine_GameLoop__f_boundaryLocator, layer.nodes__sci_List(), collectedEvents, this$1.Lindigo_gameengine_GameLoop__f_gameEngine.Lindigo_gameengine_GameEngine__f_globalEventStream.Lindigo_platform_events_GlobalEventStream__f_pushGlobalEvent);
+            $m_Lindigo_shared_scenegraph_SceneGraphViewEvents$().collectViewEvents__Lindigo_shared_BoundaryLocator__sci_List__sci_List__F1__V(this$1.Lindigo_gameengine_GameLoop__f_boundaryLocator, layer.Lindigo_shared_scenegraph_Layer__f_nodes, collectedEvents, this$1.Lindigo_gameengine_GameLoop__f_gameEngine.Lindigo_gameengine_GameEngine__f_globalEventStream.Lindigo_platform_events_GlobalEventStream__f_pushGlobalEvent);
             these$1 = $as_sci_List(these$1.tail__O())
           };
           this$1.Lindigo_gameengine_GameLoop__f_gameEngine.Lindigo_gameengine_GameEngine__f_audioPlayer.playAudio__Lindigo_shared_scenegraph_SceneAudio__V(scene.Lindigo_shared_scenegraph_SceneUpdateFragment__f_audio);
@@ -2621,7 +2621,7 @@ $c_Lindigo_platform_assets_AssetLoader$.prototype.filterOutImageAssets__sci_List
   while ((rest !== $m_sci_Nil$())) {
     var arg1 = rest.head__O();
     var at = $as_Lindigo_shared_assets_AssetType(arg1);
-    if (false) {
+    if ((at instanceof $c_Lindigo_shared_assets_AssetType$Image)) {
       var t$1 = $as_Lindigo_shared_assets_AssetType$Image(at);
       $m_s_package$();
       var elems = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lindigo_shared_assets_AssetType$Image.getArrayOf().constr)([t$1]));
@@ -2715,13 +2715,13 @@ $c_Lindigo_platform_assets_AssetLoader$.prototype.onLoadImageFuture__Lorg_scalaj
   }
 });
 $c_Lindigo_platform_assets_AssetLoader$.prototype.loadImageAsset__Lindigo_shared_assets_AssetType$Image__s_concurrent_Future = (function(imageAsset) {
-  $m_Lindigo_shared_IndigoLogger$().info__sci_Seq__V($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T.getArrayOf().constr)([("[Image] Loading " + imageAsset.path__T())])));
+  $m_Lindigo_shared_IndigoLogger$().info__sci_Seq__V($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T.getArrayOf().constr)([("[Image] Loading " + imageAsset.Lindigo_shared_assets_AssetType$Image__f_path)])));
   var image = $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().createElement("img");
-  var this$1 = imageAsset.path__T();
+  var this$1 = imageAsset.Lindigo_shared_assets_AssetType$Image__f_path;
   image.src = this$1;
   return this.onLoadImageFuture__Lorg_scalajs_dom_raw_HTMLImageElement__s_concurrent_Future(image).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1(((this$2, imageAsset$2) => ((i) => {
-    $m_Lindigo_shared_IndigoLogger$().info__sci_Seq__V($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T.getArrayOf().constr)([("[Image] Success " + imageAsset$2.path__T())])));
-    return new $c_Lindigo_platform_assets_LoadedImageAsset(imageAsset$2.name__T(), i, imageAsset$2.tag__s_Option())
+    $m_Lindigo_shared_IndigoLogger$().info__sci_Seq__V($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T.getArrayOf().constr)([("[Image] Success " + imageAsset$2.Lindigo_shared_assets_AssetType$Image__f_path)])));
+    return new $c_Lindigo_platform_assets_LoadedImageAsset(imageAsset$2.Lindigo_shared_assets_AssetType$Image__f_name, i, imageAsset$2.Lindigo_shared_assets_AssetType$Image__f_tag)
   }))(this, imageAsset)), $m_sjs_concurrent_JSExecutionContext$Implicits$().sjs_concurrent_JSExecutionContext$Implicits$__f_queue)
 });
 $c_Lindigo_platform_assets_AssetLoader$.prototype.loadTextAsset__Lindigo_shared_assets_AssetType$Text__s_concurrent_Future = (function(textAsset) {
@@ -7269,6 +7269,11 @@ $c_Lindigo_shared_datatypes_Radians$package$Radians$.prototype.fromDegrees__D__D
   var radians = ((this.Lindigo_shared_datatypes_Radians$package$Radians$__f_TAU / 360.0) * (degrees % 360.0));
   return radians
 });
+$c_Lindigo_shared_datatypes_Radians$package$Radians$.prototype.fromSeconds__D__D = (function(seconds) {
+  $m_Lindigo_shared_datatypes_Radians$package$Radians$();
+  var radians = (this.Lindigo_shared_datatypes_Radians$package$Radians$__f_TAU * (($m_Lindigo_shared_time_Seconds$package$Seconds$(), seconds) % 1.0));
+  return radians
+});
 $c_Lindigo_shared_datatypes_Radians$package$Radians$.prototype.$plus__D__D__D = (function(r, other) {
   $m_Lindigo_shared_datatypes_Radians$package$Radians$();
   var radians = (r + other);
@@ -8329,7 +8334,15 @@ function $p_Lindigo_shared_platform_DisplayObjectConversions__toTransformers__Li
   var this$3 = group.children__sci_List();
   var f = ((group$2, mat$2) => ((n) => {
     var n$1 = $as_Lindigo_shared_scenegraph_SceneNode(n);
-    var node = n$1.withDepth__I__Lindigo_shared_scenegraph_SceneNode($m_Lindigo_shared_datatypes_Depth$package$Depth$().$plus__I__I__I(n$1.depth__I(), group$2.depth__I()));
+    var newDepth = $m_Lindigo_shared_datatypes_Depth$package$Depth$().$plus__I__I__I(n$1.Lindigo_shared_scenegraph_Graphic__f_depth, group$2.depth__I());
+    var material = n$1.Lindigo_shared_scenegraph_Graphic__f_material;
+    var crop = n$1.Lindigo_shared_scenegraph_Graphic__f_crop;
+    var position = n$1.Lindigo_shared_scenegraph_Graphic__f_position;
+    var rotation = n$1.Lindigo_shared_scenegraph_Graphic__f_rotation;
+    var scale = n$1.Lindigo_shared_scenegraph_Graphic__f_scale;
+    var ref = n$1.Lindigo_shared_scenegraph_Graphic__f_ref;
+    var flip = n$1.Lindigo_shared_scenegraph_Graphic__f_flip;
+    var node = new $c_Lindigo_shared_scenegraph_Graphic(material, crop, position, rotation, scale, newDepth, ref, flip);
     return new $c_Lindigo_shared_scenegraph_Transformer(node, mat$2)
   }))(group, mat);
   if ((this$3 === $m_sci_Nil$())) {
@@ -8537,7 +8550,7 @@ $c_Lindigo_shared_platform_DisplayObjectConversions.prototype.deGroup__sci_List_
   return $p_Lindigo_shared_platform_DisplayObjectConversions__rec$1__sci_List__scm_ListBuffer(this, sceneNodes)
 });
 $c_Lindigo_shared_platform_DisplayObjectConversions.prototype.sceneNodeToDisplayObject__Lindigo_shared_scenegraph_SceneGraphNode__Lindigo_shared_time_GameTime__Lindigo_shared_platform_AssetMapping__sci_Map__sci_List = (function(sceneNode, gameTime, assetMapping, cloneBlankDisplayObjects) {
-  if (false) {
+  if ((sceneNode instanceof $c_Lindigo_shared_scenegraph_Graphic)) {
     var x = $as_Lindigo_shared_scenegraph_Graphic(sceneNode);
     $m_s_package$();
     var elems = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lindigo_shared_display_DisplayObject.getArrayOf().constr)([this.graphicToDisplayObject__Lindigo_shared_scenegraph_Graphic__Lindigo_shared_platform_AssetMapping__Lindigo_shared_display_DisplayObject(x, assetMapping)]));
@@ -8920,7 +8933,7 @@ $c_Lindigo_shared_platform_DisplayObjectConversions.prototype.textBoxToDisplayTe
   return new $c_Lindigo_shared_display_DisplayText(text, style, transform, rotation, z, width, height)
 });
 $c_Lindigo_shared_platform_DisplayObjectConversions.prototype.graphicToDisplayObject__Lindigo_shared_scenegraph_Graphic__Lindigo_shared_platform_AssetMapping__Lindigo_shared_display_DisplayObject = (function(leaf, assetMapping) {
-  var shaderData = leaf.material__Lindigo_shared_materials_Material();
+  var shaderData = leaf.Lindigo_shared_scenegraph_Graphic__f_material.toShaderData__Lindigo_shared_materials_ShaderData();
   var this$2 = $m_s_util_hashing_MurmurHash3$();
   var this$3 = this$2.productHash__s_Product__I__Z__I(shaderData, (-889275714), false);
   var shaderDataHash = ("" + this$3);
@@ -8929,11 +8942,11 @@ $c_Lindigo_shared_platform_DisplayObjectConversions.prototype.graphicToDisplayOb
   var normalOffset = this.findAssetOffsetValues__Lindigo_shared_platform_AssetMapping__s_Option__T__T__Lindigo_shared_datatypes_Vector2(assetMapping, shaderData.Lindigo_shared_materials_ShaderData__f_channel2, shaderDataHash, "_n");
   var specularOffset = this.findAssetOffsetValues__Lindigo_shared_platform_AssetMapping__s_Option__T__T__Lindigo_shared_datatypes_Vector2(assetMapping, shaderData.Lindigo_shared_materials_ShaderData__f_channel3, shaderDataHash, "_s");
   var texture = $p_Lindigo_shared_platform_DisplayObjectConversions__lookupTexture__Lindigo_shared_platform_AssetMapping__T__Lindigo_shared_platform_TextureRefAndOffset(this, assetMapping, materialName);
-  var this$5 = leaf.crop__Lindigo_shared_datatypes_Rectangle();
+  var this$5 = leaf.Lindigo_shared_scenegraph_Graphic__f_crop;
   var this$7 = $m_s_util_hashing_MurmurHash3$();
   var this$8 = this$7.productHash__s_Product__I__Z__I(this$5, (-889275714), false);
   var key = ((("" + this$8) + "_") + shaderDataHash);
-  var f = ((leaf$2, texture$2) => (() => $m_Lindigo_shared_display_SpriteSheetFrame$().calculateFrameOffset__Lindigo_shared_datatypes_Vector2__Lindigo_shared_datatypes_Rectangle__Lindigo_shared_datatypes_Vector2__Lindigo_shared_display_SpriteSheetFrame$SpriteSheetFrameCoordinateOffsets(texture$2.Lindigo_shared_platform_TextureRefAndOffset__f_atlasSize, leaf$2.crop__Lindigo_shared_datatypes_Rectangle(), texture$2.Lindigo_shared_platform_TextureRefAndOffset__f_offset)))(leaf, texture);
+  var f = ((leaf$2, texture$2) => (() => $m_Lindigo_shared_display_SpriteSheetFrame$().calculateFrameOffset__Lindigo_shared_datatypes_Vector2__Lindigo_shared_datatypes_Rectangle__Lindigo_shared_datatypes_Vector2__Lindigo_shared_display_SpriteSheetFrame$SpriteSheetFrameCoordinateOffsets(texture$2.Lindigo_shared_platform_TextureRefAndOffset__f_atlasSize, leaf$2.Lindigo_shared_scenegraph_Graphic__f_crop, texture$2.Lindigo_shared_platform_TextureRefAndOffset__f_offset)))(leaf, texture);
   var cache = this.Lindigo_shared_platform_DisplayObjectConversions__f_frameCache;
   try {
     var $$x1 = cache.Lindigo_shared_QuickCache__f_cache.apply__O__O(key)
@@ -8972,32 +8985,33 @@ $c_Lindigo_shared_platform_DisplayObjectConversions.prototype.graphicToDisplayOb
   };
   var $$x8 = $m_Lindigo_shared_display_DisplayObject$();
   var $$x7 = $m_Lindigo_shared_platform_DisplayObjectConversions$();
-  var this$16 = leaf.position__Lindigo_shared_datatypes_Point();
+  var this$16 = leaf.Lindigo_shared_scenegraph_Graphic__f_position;
   $m_Lindigo_shared_datatypes_Vector2$();
   var x = this$16.Lindigo_shared_datatypes_Point__f_x;
   var y = this$16.Lindigo_shared_datatypes_Point__f_y;
   var $$x6 = new $c_Lindigo_shared_datatypes_Vector2(x, y);
   $m_Lindigo_shared_datatypes_Vector3$();
-  var x$1 = leaf.crop__Lindigo_shared_datatypes_Rectangle().Lindigo_shared_datatypes_Rectangle__f_size.Lindigo_shared_datatypes_Size__f_width;
-  var y$1 = leaf.crop__Lindigo_shared_datatypes_Rectangle().Lindigo_shared_datatypes_Rectangle__f_size.Lindigo_shared_datatypes_Size__f_height;
+  var x$1 = leaf.Lindigo_shared_scenegraph_Graphic__f_crop.Lindigo_shared_datatypes_Rectangle__f_size.Lindigo_shared_datatypes_Size__f_width;
+  var y$1 = leaf.Lindigo_shared_scenegraph_Graphic__f_crop.Lindigo_shared_datatypes_Rectangle__f_size.Lindigo_shared_datatypes_Size__f_height;
   var $$x5 = $$x7.nodeToMatrix4__Lindigo_shared_scenegraph_SceneNode__Lindigo_shared_datatypes_Vector2__Lindigo_shared_datatypes_Vector3__Lindigo_shared_datatypes_mutable_CheapMatrix4(leaf, $$x6, new $c_Lindigo_shared_datatypes_Vector3(x$1, y$1, 1.0));
-  var $$x4 = leaf.rotation__D();
+  var $$x4 = leaf.Lindigo_shared_scenegraph_Graphic__f_rotation;
   $m_Lindigo_shared_datatypes_Depth$package$Depth$();
-  var d = leaf.depth__I();
-  var $$x3 = leaf.crop__Lindigo_shared_datatypes_Rectangle().Lindigo_shared_datatypes_Rectangle__f_size.Lindigo_shared_datatypes_Size__f_width;
-  var $$x2 = leaf.crop__Lindigo_shared_datatypes_Rectangle().Lindigo_shared_datatypes_Rectangle__f_size.Lindigo_shared_datatypes_Size__f_height;
+  var d = leaf.Lindigo_shared_scenegraph_Graphic__f_depth;
+  var $$x3 = leaf.Lindigo_shared_scenegraph_Graphic__f_crop.Lindigo_shared_datatypes_Rectangle__f_size.Lindigo_shared_datatypes_Size__f_width;
+  var $$x2 = leaf.Lindigo_shared_scenegraph_Graphic__f_crop.Lindigo_shared_datatypes_Rectangle__f_size.Lindigo_shared_datatypes_Size__f_height;
   var value$1 = texture.Lindigo_shared_platform_TextureRefAndOffset__f_atlasName;
   return $$x8.apply__Lindigo_shared_datatypes_mutable_CheapMatrix4__D__D__I__I__s_Option__Lindigo_shared_display_SpriteSheetFrame$SpriteSheetFrameCoordinateOffsets__Lindigo_shared_datatypes_Vector2__Lindigo_shared_datatypes_Vector2__Lindigo_shared_datatypes_Vector2__Lindigo_shared_datatypes_Vector2__Lindigo_shared_datatypes_Vector2__T__sci_List__Lindigo_shared_display_DisplayObject($$x5, $$x4, d, $$x3, $$x2, new $c_s_Some(value$1), frameInfo, $as_Lindigo_shared_datatypes_Vector2(frameInfo.Lindigo_shared_display_SpriteSheetFrame$SpriteSheetFrameCoordinateOffsets__f_translateCoords.apply__O__O(emissiveOffset)), $as_Lindigo_shared_datatypes_Vector2(frameInfo.Lindigo_shared_display_SpriteSheetFrame$SpriteSheetFrameCoordinateOffsets__f_translateCoords.apply__O__O(normalOffset)), $as_Lindigo_shared_datatypes_Vector2(frameInfo.Lindigo_shared_display_SpriteSheetFrame$SpriteSheetFrameCoordinateOffsets__f_translateCoords.apply__O__O(specularOffset)), texture.Lindigo_shared_platform_TextureRefAndOffset__f_size, texture.Lindigo_shared_platform_TextureRefAndOffset__f_atlasSize, shaderId, uniformData)
 });
 $c_Lindigo_shared_platform_DisplayObjectConversions.prototype.spriteToDisplayObject__Lindigo_shared_BoundaryLocator__Lindigo_shared_scenegraph_Sprite__Lindigo_shared_platform_AssetMapping__Lindigo_shared_animation_AnimationRef__Lindigo_shared_display_DisplayObject = (function(boundaryLocator, leaf, assetMapping, anim) {
   var material = leaf.material__Lindigo_shared_materials_Material();
+  var shaderData = material.toShaderData__Lindigo_shared_materials_ShaderData();
   var this$2 = $m_s_util_hashing_MurmurHash3$();
-  var this$3 = this$2.productHash__s_Product__I__Z__I(material, (-889275714), false);
+  var this$3 = this$2.productHash__s_Product__I__Z__I(shaderData, (-889275714), false);
   var shaderDataHash = ("" + this$3);
-  var materialName = $as_T(material.Lindigo_shared_materials_ShaderData__f_channel0.get__O());
-  var emissiveOffset = this.findAssetOffsetValues__Lindigo_shared_platform_AssetMapping__s_Option__T__T__Lindigo_shared_datatypes_Vector2(assetMapping, material.Lindigo_shared_materials_ShaderData__f_channel1, shaderDataHash, "_e");
-  var normalOffset = this.findAssetOffsetValues__Lindigo_shared_platform_AssetMapping__s_Option__T__T__Lindigo_shared_datatypes_Vector2(assetMapping, material.Lindigo_shared_materials_ShaderData__f_channel2, shaderDataHash, "_n");
-  var specularOffset = this.findAssetOffsetValues__Lindigo_shared_platform_AssetMapping__s_Option__T__T__Lindigo_shared_datatypes_Vector2(assetMapping, material.Lindigo_shared_materials_ShaderData__f_channel3, shaderDataHash, "_s");
+  var materialName = $as_T(shaderData.Lindigo_shared_materials_ShaderData__f_channel0.get__O());
+  var emissiveOffset = this.findAssetOffsetValues__Lindigo_shared_platform_AssetMapping__s_Option__T__T__Lindigo_shared_datatypes_Vector2(assetMapping, shaderData.Lindigo_shared_materials_ShaderData__f_channel1, shaderDataHash, "_e");
+  var normalOffset = this.findAssetOffsetValues__Lindigo_shared_platform_AssetMapping__s_Option__T__T__Lindigo_shared_datatypes_Vector2(assetMapping, shaderData.Lindigo_shared_materials_ShaderData__f_channel2, shaderDataHash, "_n");
+  var specularOffset = this.findAssetOffsetValues__Lindigo_shared_platform_AssetMapping__s_Option__T__T__Lindigo_shared_datatypes_Vector2(assetMapping, shaderData.Lindigo_shared_materials_ShaderData__f_channel3, shaderDataHash, "_s");
   var texture = $p_Lindigo_shared_platform_DisplayObjectConversions__lookupTexture__Lindigo_shared_platform_AssetMapping__T__Lindigo_shared_platform_TextureRefAndOffset(this, assetMapping, materialName);
   var key = (anim.frameHash__T() + shaderDataHash);
   var f = ((anim$2, texture$2) => (() => $m_Lindigo_shared_display_SpriteSheetFrame$().calculateFrameOffset__Lindigo_shared_datatypes_Vector2__Lindigo_shared_datatypes_Rectangle__Lindigo_shared_datatypes_Vector2__Lindigo_shared_display_SpriteSheetFrame$SpriteSheetFrameCoordinateOffsets(texture$2.Lindigo_shared_platform_TextureRefAndOffset__f_atlasSize, anim$2.currentCycle__Lindigo_shared_animation_CycleRef().currentFrame__Lindigo_shared_animation_Frame().crop__Lindigo_shared_datatypes_Rectangle(), texture$2.Lindigo_shared_platform_TextureRefAndOffset__f_offset)))(anim, texture);
@@ -9014,8 +9028,8 @@ $c_Lindigo_shared_platform_DisplayObjectConversions.prototype.spriteToDisplayObj
   var frameInfo = $as_Lindigo_shared_display_SpriteSheetFrame$SpriteSheetFrameCoordinateOffsets($$x1);
   var this$8 = boundaryLocator.spriteBounds__Lindigo_shared_scenegraph_Sprite__s_Option(leaf);
   var bounds = $as_Lindigo_shared_datatypes_Rectangle((this$8.isEmpty__Z() ? $m_Lindigo_shared_datatypes_Rectangle$().Lindigo_shared_datatypes_Rectangle$__f_zero : this$8.get__O()));
-  var shaderId = material.Lindigo_shared_materials_ShaderData__f_shaderId;
-  var this$11 = material.Lindigo_shared_materials_ShaderData__f_uniformBlocks;
+  var shaderId = shaderData.Lindigo_shared_materials_ShaderData__f_shaderId;
+  var this$11 = shaderData.Lindigo_shared_materials_ShaderData__f_uniformBlocks;
   var f$1 = ((this$9) => ((ub) => {
     var ub$1 = $as_Lindigo_shared_shader_UniformBlock(ub);
     var uniformHash = ub$1.uniformHash__T();
@@ -9064,20 +9078,21 @@ $c_Lindigo_shared_platform_DisplayObjectConversions.prototype.textLineToDisplayO
     var alignmentOffsetX$1 = $uI(alignmentOffsetX);
     var yOffset$1 = $uI(yOffset);
     var material = leaf$2.material__Lindigo_shared_materials_Material();
+    var shaderData = material.toShaderData__Lindigo_shared_materials_ShaderData();
     var this$3 = $m_s_util_hashing_MurmurHash3$();
-    var this$4 = this$3.productHash__s_Product__I__Z__I(material, (-889275714), false);
+    var this$4 = this$3.productHash__s_Product__I__Z__I(shaderData, (-889275714), false);
     var shaderDataHash = ("" + this$4);
-    var materialName = $as_T(material.Lindigo_shared_materials_ShaderData__f_channel0.get__O());
+    var materialName = $as_T(shaderData.Lindigo_shared_materials_ShaderData__f_channel0.get__O());
     var this$6 = leaf$2.hashCode__I();
     var this$9 = $m_s_util_hashing_MurmurHash3$();
     var this$10 = this$9.productHash__s_Product__I__Z__I(line$1, (-889275714), false);
     var lineHash = (("" + this$6) + ("" + this$10));
-    var emissiveOffset = this$1.findAssetOffsetValues__Lindigo_shared_platform_AssetMapping__s_Option__T__T__Lindigo_shared_datatypes_Vector2(assetMapping$2, material.Lindigo_shared_materials_ShaderData__f_channel1, shaderDataHash, "_e");
-    var normalOffset = this$1.findAssetOffsetValues__Lindigo_shared_platform_AssetMapping__s_Option__T__T__Lindigo_shared_datatypes_Vector2(assetMapping$2, material.Lindigo_shared_materials_ShaderData__f_channel2, shaderDataHash, "_n");
-    var specularOffset = this$1.findAssetOffsetValues__Lindigo_shared_platform_AssetMapping__s_Option__T__T__Lindigo_shared_datatypes_Vector2(assetMapping$2, material.Lindigo_shared_materials_ShaderData__f_channel3, shaderDataHash, "_s");
+    var emissiveOffset = this$1.findAssetOffsetValues__Lindigo_shared_platform_AssetMapping__s_Option__T__T__Lindigo_shared_datatypes_Vector2(assetMapping$2, shaderData.Lindigo_shared_materials_ShaderData__f_channel1, shaderDataHash, "_e");
+    var normalOffset = this$1.findAssetOffsetValues__Lindigo_shared_platform_AssetMapping__s_Option__T__T__Lindigo_shared_datatypes_Vector2(assetMapping$2, shaderData.Lindigo_shared_materials_ShaderData__f_channel2, shaderDataHash, "_n");
+    var specularOffset = this$1.findAssetOffsetValues__Lindigo_shared_platform_AssetMapping__s_Option__T__T__Lindigo_shared_datatypes_Vector2(assetMapping$2, shaderData.Lindigo_shared_materials_ShaderData__f_channel3, shaderDataHash, "_s");
     var texture = $p_Lindigo_shared_platform_DisplayObjectConversions__lookupTexture__Lindigo_shared_platform_AssetMapping__T__Lindigo_shared_platform_TextureRefAndOffset(this$1, assetMapping$2, materialName);
-    var shaderId = material.Lindigo_shared_materials_ShaderData__f_shaderId;
-    var this$14 = material.Lindigo_shared_materials_ShaderData__f_uniformBlocks;
+    var shaderId = shaderData.Lindigo_shared_materials_ShaderData__f_shaderId;
+    var this$14 = shaderData.Lindigo_shared_materials_ShaderData__f_uniformBlocks;
     var f = ((this$12) => ((ub) => {
       var ub$1 = $as_Lindigo_shared_shader_UniformBlock(ub);
       var uniformHash = ub$1.uniformHash__T();
@@ -9370,7 +9385,7 @@ function $h_Lindigo_shared_platform_DisplayObjectConversions$() {
 }
 $h_Lindigo_shared_platform_DisplayObjectConversions$.prototype = $c_Lindigo_shared_platform_DisplayObjectConversions$.prototype;
 $c_Lindigo_shared_platform_DisplayObjectConversions$.prototype.nodeToMatrix4__Lindigo_shared_scenegraph_SceneNode__Lindigo_shared_datatypes_Vector2__Lindigo_shared_datatypes_Vector3__Lindigo_shared_datatypes_mutable_CheapMatrix4 = (function(node, position, size) {
-  return $m_Lindigo_shared_datatypes_mutable_CheapMatrix4$().identity__Lindigo_shared_datatypes_mutable_CheapMatrix4().scale__D__D__D__Lindigo_shared_datatypes_mutable_CheapMatrix4((node.flip__Lindigo_shared_datatypes_Flip().Lindigo_shared_datatypes_Flip__f_horizontal ? (-1.0) : 1.0), (node.flip__Lindigo_shared_datatypes_Flip().Lindigo_shared_datatypes_Flip__f_vertical ? 1.0 : (-1.0)), 1.0).translate__D__D__D__Lindigo_shared_datatypes_mutable_CheapMatrix4(((-(node.ref__Lindigo_shared_datatypes_Point().Lindigo_shared_datatypes_Point__f_x / size.Lindigo_shared_datatypes_Vector3__f_x)) + 0.5), ((-(node.ref__Lindigo_shared_datatypes_Point().Lindigo_shared_datatypes_Point__f_y / size.Lindigo_shared_datatypes_Vector3__f_y)) + 0.5), 0.0).scale__D__D__D__Lindigo_shared_datatypes_mutable_CheapMatrix4((size.Lindigo_shared_datatypes_Vector3__f_x * node.scale__Lindigo_shared_datatypes_Vector2().Lindigo_shared_datatypes_Vector2__f_x), (size.Lindigo_shared_datatypes_Vector3__f_y * node.scale__Lindigo_shared_datatypes_Vector2().Lindigo_shared_datatypes_Vector2__f_y), size.Lindigo_shared_datatypes_Vector3__f_z).rotate__D__Lindigo_shared_datatypes_mutable_CheapMatrix4(node.rotation__D()).translate__D__D__D__Lindigo_shared_datatypes_mutable_CheapMatrix4(position.Lindigo_shared_datatypes_Vector2__f_x, position.Lindigo_shared_datatypes_Vector2__f_y, 0.0)
+  return $m_Lindigo_shared_datatypes_mutable_CheapMatrix4$().identity__Lindigo_shared_datatypes_mutable_CheapMatrix4().scale__D__D__D__Lindigo_shared_datatypes_mutable_CheapMatrix4((node.Lindigo_shared_scenegraph_Graphic__f_flip.Lindigo_shared_datatypes_Flip__f_horizontal ? (-1.0) : 1.0), (node.Lindigo_shared_scenegraph_Graphic__f_flip.Lindigo_shared_datatypes_Flip__f_vertical ? 1.0 : (-1.0)), 1.0).translate__D__D__D__Lindigo_shared_datatypes_mutable_CheapMatrix4(((-(node.Lindigo_shared_scenegraph_Graphic__f_ref.Lindigo_shared_datatypes_Point__f_x / size.Lindigo_shared_datatypes_Vector3__f_x)) + 0.5), ((-(node.Lindigo_shared_scenegraph_Graphic__f_ref.Lindigo_shared_datatypes_Point__f_y / size.Lindigo_shared_datatypes_Vector3__f_y)) + 0.5), 0.0).scale__D__D__D__Lindigo_shared_datatypes_mutable_CheapMatrix4((size.Lindigo_shared_datatypes_Vector3__f_x * node.Lindigo_shared_scenegraph_Graphic__f_scale.Lindigo_shared_datatypes_Vector2__f_x), (size.Lindigo_shared_datatypes_Vector3__f_y * node.Lindigo_shared_scenegraph_Graphic__f_scale.Lindigo_shared_datatypes_Vector2__f_y), size.Lindigo_shared_datatypes_Vector3__f_z).rotate__D__Lindigo_shared_datatypes_mutable_CheapMatrix4(node.Lindigo_shared_scenegraph_Graphic__f_rotation).translate__D__D__D__Lindigo_shared_datatypes_mutable_CheapMatrix4(position.Lindigo_shared_datatypes_Vector2__f_x, position.Lindigo_shared_datatypes_Vector2__f_y, 0.0)
 });
 $c_Lindigo_shared_platform_DisplayObjectConversions$.prototype.cloneTransformDataToMatrix4__Lindigo_shared_scenegraph_CloneTransformData__Lindigo_shared_datatypes_mutable_CheapMatrix4__Lindigo_shared_datatypes_mutable_CheapMatrix4 = (function(data, blankTransform) {
   var this$1 = blankTransform.deepClone__Lindigo_shared_datatypes_mutable_CheapMatrix4();
@@ -9606,7 +9621,7 @@ $c_Lindigo_shared_platform_SceneProcessor.prototype.processScene__Lindigo_shared
         acc = $as_sci_Map(acc$1.updated__O__O__sci_MapOps(self, y));
         break matchResult2
       };
-      if (false) {
+      if ((x4 instanceof $c_Lindigo_shared_scenegraph_Graphic)) {
         var g = $as_Lindigo_shared_scenegraph_Graphic(x4);
         var self$1 = blank.id__T();
         var y$1 = this.Lindigo_shared_platform_SceneProcessor__f_displayObjectConverterClone.graphicToDisplayObject__Lindigo_shared_scenegraph_Graphic__Lindigo_shared_platform_AssetMapping__Lindigo_shared_display_DisplayObject(g, assetMapping);
@@ -9638,7 +9653,7 @@ $c_Lindigo_shared_platform_SceneProcessor.prototype.processScene__Lindigo_shared
   var this$10 = scene.Lindigo_shared_scenegraph_SceneUpdateFragment__f_layers;
   var f = ((l) => {
     var l$1 = $as_Lindigo_shared_scenegraph_Layer(l);
-    var this$9 = l$1.visible__s_Option();
+    var this$9 = l$1.Lindigo_shared_scenegraph_Layer__f_visible;
     return $uZ((this$9.isEmpty__Z() || this$9.get__O()))
   });
   var l$2 = this$10;
@@ -9710,24 +9725,24 @@ $c_Lindigo_shared_platform_SceneProcessor.prototype.processScene__Lindigo_shared
     if ((x$1$2 !== null)) {
       var l$3 = $as_Lindigo_shared_scenegraph_Layer(x$1$2.T2__f__1);
       var i = $uI(x$1$2.T2__f__2);
-      var this$11 = l$3.blending__s_Option();
+      var this$11 = l$3.Lindigo_shared_scenegraph_Layer__f_blending;
       var blending = $as_Lindigo_shared_scenegraph_Blending((this$11.isEmpty__Z() ? $m_Lindigo_shared_scenegraph_Blending$().Lindigo_shared_scenegraph_Blending$__f_Normal : this$11.get__O()));
       var shaderData = blending.Lindigo_shared_scenegraph_Blending__f_blendMaterial.toShaderData__Lindigo_shared_materials_BlendShaderData();
-      var entities = this$2$1.Lindigo_shared_platform_SceneProcessor__f_displayObjectConverter.sceneNodesToDisplayObjects__sci_List__Lindigo_shared_time_GameTime__Lindigo_shared_platform_AssetMapping__sci_Map__scm_ListBuffer(l$3.nodes__sci_List(), gameTime$3, assetMapping$3, cloneBlankDisplayObjects$2);
+      var entities = this$2$1.Lindigo_shared_platform_SceneProcessor__f_displayObjectConverter.sceneNodesToDisplayObjects__sci_List__Lindigo_shared_time_GameTime__Lindigo_shared_platform_AssetMapping__sci_Map__scm_ListBuffer(l$3.Lindigo_shared_scenegraph_Layer__f_nodes, gameTime$3, assetMapping$3, cloneBlankDisplayObjects$2);
       var $$x1 = $m_Lindigo_shared_platform_SceneProcessor$();
       var this$12 = scene$2.Lindigo_shared_scenegraph_SceneUpdateFragment__f_lights;
-      var suffix = l$3.lights__sci_List();
+      var suffix = l$3.Lindigo_shared_scenegraph_Layer__f_lights;
       var lightsData = $$x1.makeLightsData__sci_List__AF(this$12.appendedAll__sc_IterableOnce__sci_List(suffix));
       var this$13 = blending.Lindigo_shared_scenegraph_Blending__f_clearColor;
       var bgColor = $as_Lindigo_shared_datatypes_RGBA((this$13.isEmpty__Z() ? $m_Lindigo_shared_datatypes_RGBA$().Lindigo_shared_datatypes_RGBA$__f_Zero : this$13.get__O()));
-      var magnification = l$3.magnification__s_Option();
-      var this$14 = l$3.depth__s_Option();
+      var magnification = l$3.Lindigo_shared_scenegraph_Layer__f_magnification;
+      var this$14 = l$3.Lindigo_shared_scenegraph_Layer__f_depth;
       var depth = $uI((this$14.isEmpty__Z() ? ($m_Lindigo_shared_datatypes_Depth$package$Depth$(), i) : this$14.get__O()));
       var entityBlend = blending.Lindigo_shared_scenegraph_Blending__f_entity;
       var layerBlend = blending.Lindigo_shared_scenegraph_Blending__f_layer;
       var shaderId = shaderData.Lindigo_shared_materials_BlendShaderData__f_shaderId;
       var shaderUniformData = $m_Lindigo_shared_platform_SceneProcessor$().mergeShaderToUniformData__Lindigo_shared_materials_BlendShaderData__Lindigo_shared_QuickCache__sci_List(shaderData, this$2$1.Lindigo_shared_platform_SceneProcessor__f_uniformsCache);
-      var camera = l$3.camera__s_Option();
+      var camera = l$3.Lindigo_shared_scenegraph_Layer__f_camera;
       return new $c_Lindigo_shared_display_DisplayLayer(entities, lightsData, bgColor, magnification, depth, entityBlend, layerBlend, shaderId, shaderUniformData, camera)
     };
     throw new $c_s_MatchError(x$1$2)
@@ -11178,6 +11193,24 @@ function $h_Lindigo_shared_temporal_Signal$package$Signal$() {
 $h_Lindigo_shared_temporal_Signal$package$Signal$.prototype = $c_Lindigo_shared_temporal_Signal$package$Signal$.prototype;
 $c_Lindigo_shared_temporal_Signal$package$Signal$.prototype.at__F1__D__O = (function(s, t) {
   return s.apply__O__O(t)
+});
+$c_Lindigo_shared_temporal_Signal$package$Signal$.prototype.Orbit__Lindigo_shared_datatypes_Point__D__D__F1 = (function(center, distance, offset) {
+  $m_Lindigo_shared_temporal_Signal$package$Signal$();
+  var run = new $c_sjsr_AnonFunction1(((this$1, center$2, distance$2, offset$2) => ((t) => {
+    var t$1 = $uD(t);
+    $m_Lindigo_shared_datatypes_Vector2$();
+    $m_Lindigo_shared_datatypes_Radians$package$Radians$();
+    var r = $m_Lindigo_shared_datatypes_Radians$package$Radians$().$plus__D__D__D($m_Lindigo_shared_datatypes_Radians$package$Radians$().fromSeconds__D__D(t$1), offset$2);
+    var x = (($uD(Math.sin(r)) * distance$2) + center$2.Lindigo_shared_datatypes_Point__f_x);
+    $m_Lindigo_shared_datatypes_Radians$package$Radians$();
+    var r$1 = $m_Lindigo_shared_datatypes_Radians$package$Radians$().$plus__D__D__D($m_Lindigo_shared_datatypes_Radians$package$Radians$().fromSeconds__D__D(t$1), offset$2);
+    var y = (($uD(Math.cos(r$1)) * distance$2) + center$2.Lindigo_shared_datatypes_Point__f_y);
+    return new $c_Lindigo_shared_datatypes_Vector2(x, y)
+  }))(this, center, distance, offset));
+  return run
+});
+$c_Lindigo_shared_temporal_Signal$package$Signal$.prototype.Orbit__Lindigo_shared_datatypes_Point__D__F1 = (function(center, distance) {
+  return this.Orbit__Lindigo_shared_datatypes_Point__D__D__F1(center, distance, ($m_Lindigo_shared_datatypes_Radians$package$Radians$(), 0.0))
 });
 var $d_Lindigo_shared_temporal_Signal$package$Signal$ = new $TypeData().initClass({
   Lindigo_shared_temporal_Signal$package$Signal$: 0
@@ -16864,6 +16897,9 @@ $c_sr_ScalaRunTime$.prototype.wrapRefArray__AO__sci_ArraySeq = (function(xs) {
     return new $c_sci_ArraySeq$ofRef(xs)
   }
 });
+$c_sr_ScalaRunTime$.prototype.wrapIntArray__AI__sci_ArraySeq = (function(xs) {
+  return ((xs !== null) ? new $c_sci_ArraySeq$ofInt(xs) : null)
+});
 $c_sr_ScalaRunTime$.prototype.wrapDoubleArray__AD__sci_ArraySeq = (function(xs) {
   return ((xs !== null) ? new $c_sci_ArraySeq$ofDouble(xs) : null)
 });
@@ -20267,6 +20303,13 @@ function $isArrayOf_Lindigo_shared_scenegraph_SceneNode(obj, depth) {
 function $asArrayOf_Lindigo_shared_scenegraph_SceneNode(obj, depth) {
   return (($isArrayOf_Lindigo_shared_scenegraph_SceneNode(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lindigo.shared.scenegraph.SceneNode;", depth))
 }
+var $d_Lindigo_shared_scenegraph_SceneNode = new $TypeData().initClass({
+  Lindigo_shared_scenegraph_SceneNode: 0
+}, true, "indigo.shared.scenegraph.SceneNode", {
+  Lindigo_shared_scenegraph_SceneNode: 1,
+  O: 1,
+  Lindigo_shared_scenegraph_SceneGraphNode: 1
+});
 /** @constructor */
 function $c_Lindigo_shared_shader_IsShaderValue$$anon$1(length$2, valueToArray$2) {
   this.Lindigo_shared_shader_IsShaderValue$$anon$1__f_length$1 = 0;
@@ -20856,14 +20899,32 @@ function $isArrayOf_jl_Throwable(obj, depth) {
 function $asArrayOf_jl_Throwable(obj, depth) {
   return (($isArrayOf_jl_Throwable(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Ljava.lang.Throwable;", depth))
 }
+function $p_ju_Random__loop$1__I__I($thiz, n$1) {
+  while (true) {
+    var bits = $thiz.next__I__I(31);
+    var value = $intMod(bits, n$1);
+    if ((((((bits - value) | 0) + (((-1) + n$1) | 0)) | 0) < 0)) {
+      /*<skip>*/
+    } else {
+      return value
+    }
+  }
+}
+function $ct_ju_Random__J__($thiz, seed_in) {
+  $thiz.ju_Random__f_haveNextNextGaussian = false;
+  $thiz.setSeed__J__V(seed_in);
+  return $thiz
+}
+function $ct_ju_Random__($thiz) {
+  $ct_ju_Random__J__($thiz, $m_ju_Random$().java$util$Random$$randomSeed__J());
+  return $thiz
+}
 /** @constructor */
-function $c_ju_Random(seed_in) {
+function $c_ju_Random() {
   this.ju_Random__f_seedHi = 0;
   this.ju_Random__f_seedLo = 0;
   this.ju_Random__f_nextNextGaussian = 0.0;
-  this.ju_Random__f_haveNextNextGaussian = false;
-  this.ju_Random__f_haveNextNextGaussian = false;
-  this.setSeed__J__V(seed_in)
+  this.ju_Random__f_haveNextNextGaussian = false
 }
 $c_ju_Random.prototype = new $h_O();
 $c_ju_Random.prototype.constructor = $c_ju_Random;
@@ -20881,6 +20942,26 @@ $c_ju_Random.prototype.setSeed__J__V = (function(seed_in) {
   this.ju_Random__f_seedLo = (16777215 & lo);
   this.ju_Random__f_haveNextNextGaussian = false
 });
+$c_ju_Random.prototype.next__I__I = (function(bits) {
+  var oldSeedHi = this.ju_Random__f_seedHi;
+  var oldSeedLo = this.ju_Random__f_seedLo;
+  var loProd = ((1.5525485E7 * oldSeedLo) + 11.0);
+  var hiProd = ((1502.0 * oldSeedLo) + (1.5525485E7 * oldSeedHi));
+  var x = (loProd / 1.6777216E7);
+  var newSeedHi = (16777215 & (($uI((x | 0)) + (16777215 & $uI((hiProd | 0)))) | 0));
+  var newSeedLo = (16777215 & $uI((loProd | 0)));
+  this.ju_Random__f_seedHi = newSeedHi;
+  this.ju_Random__f_seedLo = newSeedLo;
+  var result32 = ((newSeedHi << 8) | (newSeedLo >> 16));
+  return ((result32 >>> ((32 - bits) | 0)) | 0)
+});
+$c_ju_Random.prototype.nextInt__I__I = (function(n) {
+  if ((n <= 0)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "n must be positive")
+  } else {
+    return (((n & ((-n) | 0)) === n) ? (this.next__I__I(31) >> $clz32(n)) : $p_ju_Random__loop$1__I__I(this, n))
+  }
+});
 var $d_ju_Random = new $TypeData().initClass({
   ju_Random: 0
 }, false, "java.util.Random", {
@@ -20889,6 +20970,41 @@ var $d_ju_Random = new $TypeData().initClass({
   Ljava_io_Serializable: 1
 });
 $c_ju_Random.prototype.$classData = $d_ju_Random;
+function $p_ju_Random$__randomInt__I($thiz) {
+  var a = (4.294967296E9 * $uD(Math.random()));
+  return $doubleToInt(($uD(Math.floor(a)) - 2.147483648E9))
+}
+/** @constructor */
+function $c_ju_Random$() {
+  /*<skip>*/
+}
+$c_ju_Random$.prototype = new $h_O();
+$c_ju_Random$.prototype.constructor = $c_ju_Random$;
+/** @constructor */
+function $h_ju_Random$() {
+  /*<skip>*/
+}
+$h_ju_Random$.prototype = $c_ju_Random$.prototype;
+$c_ju_Random$.prototype.java$util$Random$$randomSeed__J = (function() {
+  var value = $p_ju_Random$__randomInt__I(this);
+  var value$1 = $p_ju_Random$__randomInt__I(this);
+  return new $c_RTLong(value$1, value)
+});
+var $d_ju_Random$ = new $TypeData().initClass({
+  ju_Random$: 0
+}, false, "java.util.Random$", {
+  ju_Random$: 1,
+  O: 1,
+  Ljava_io_Serializable: 1
+});
+$c_ju_Random$.prototype.$classData = $d_ju_Random$;
+var $n_ju_Random$;
+function $m_ju_Random$() {
+  if ((!$n_ju_Random$)) {
+    $n_ju_Random$ = new $c_ju_Random$()
+  };
+  return $n_ju_Random$
+}
 function $ct_ju_concurrent_atomic_AtomicReference__O__($thiz, value) {
   $thiz.ju_concurrent_atomic_AtomicReference__f_value = value;
   return $thiz
@@ -22486,7 +22602,7 @@ function $ct_s_util_Random__ju_Random__($thiz, self) {
   return $thiz
 }
 function $ct_s_util_Random__J__($thiz, seed) {
-  $ct_s_util_Random__ju_Random__($thiz, new $c_ju_Random(seed));
+  $ct_s_util_Random__ju_Random__($thiz, $ct_ju_Random__J__(new $c_ju_Random(), seed));
   return $thiz
 }
 /** @constructor */
@@ -22705,6 +22821,7 @@ $c_s_util_matching_Regex.prototype.$classData = $d_s_util_matching_Regex;
 function $c_LHelloIndigo$() {
   this.LHelloIndigo$__f_config = null;
   this.LHelloIndigo$__f_animations = null;
+  this.LHelloIndigo$__f_assetName = null;
   this.LHelloIndigo$__f_assets = null;
   this.LHelloIndigo$__f_fonts = null;
   this.LHelloIndigo$__f_shaders = null;
@@ -22713,15 +22830,22 @@ function $c_LHelloIndigo$() {
   var this$1 = $m_s_Predef$().s_Predef$__f_Set;
   var elems = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lindigo_shared_animation_Animation.getArrayOf().constr)([]));
   this.LHelloIndigo$__f_animations = this$1.from__sc_IterableOnce__sci_Set(elems);
-  var this$2 = $m_s_Predef$().s_Predef$__f_Set;
-  var elems$1 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lindigo_shared_assets_AssetType.getArrayOf().constr)([]));
-  this.LHelloIndigo$__f_assets = this$2.from__sc_IterableOnce__sci_Set(elems$1);
-  var this$3 = $m_s_Predef$().s_Predef$__f_Set;
+  this.LHelloIndigo$__f_assetName = ($m_Lindigo_package$package$(), "snake");
+  var this$6 = $m_s_Predef$().s_Predef$__f_Set;
+  var $$x1 = $m_sr_ScalaRunTime$();
+  $m_Lindigo_package$package$();
+  var name = this.LHelloIndigo$__f_assetName;
+  $m_Lindigo_package$package$();
+  var path = "assets/snake.png";
+  var tag = $m_s_None$();
+  var elems$1 = $$x1.wrapRefArray__AO__sci_ArraySeq(new ($d_Lindigo_shared_assets_AssetType.getArrayOf().constr)([new $c_Lindigo_shared_assets_AssetType$Image(name, path, tag)]));
+  this.LHelloIndigo$__f_assets = this$6.from__sc_IterableOnce__sci_Set(elems$1);
+  var this$7 = $m_s_Predef$().s_Predef$__f_Set;
   var elems$2 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lindigo_shared_datatypes_FontInfo.getArrayOf().constr)([]));
-  this.LHelloIndigo$__f_fonts = this$3.from__sc_IterableOnce__sci_Set(elems$2);
-  var this$4 = $m_s_Predef$().s_Predef$__f_Set;
+  this.LHelloIndigo$__f_fonts = this$7.from__sc_IterableOnce__sci_Set(elems$2);
+  var this$8 = $m_s_Predef$().s_Predef$__f_Set;
   var elems$3 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lindigo_shared_shader_Shader.getArrayOf().constr)([]));
-  this.LHelloIndigo$__f_shaders = this$4.from__sc_IterableOnce__sci_Set(elems$3)
+  this.LHelloIndigo$__f_shaders = this$8.from__sc_IterableOnce__sci_Set(elems$3)
 }
 $c_LHelloIndigo$.prototype = new $h_O();
 $c_LHelloIndigo$.prototype.constructor = $c_LHelloIndigo$;
@@ -22813,7 +22937,50 @@ $c_LHelloIndigo$.prototype.updateModel__Lindigo_shared_FrameContext__jl_Void__F1
 $c_LHelloIndigo$.prototype.present__Lindigo_shared_FrameContext__jl_Void__Lindigo_shared_Outcome = (function(context, model) {
   $m_Lindigo_package$package$();
   try {
-    var state = $m_Lindigo_package$package$().Lindigo_package$package$__f_SceneUpdateFragment.Lindigo_shared_scenegraph_SceneUpdateFragment$__f_empty;
+    $m_Lindigo_package$package$();
+    var $$x5 = $m_sr_ScalaRunTime$();
+    var $$x3 = $m_Lindigo_package$package$().Lindigo_package$package$__f_Graphic;
+    var $$x2 = $m_Lindigo_package$package$().Lindigo_package$package$__f_Rectangle.apply__I__I__I__I__Lindigo_shared_datatypes_Rectangle(0, 0, 36, 12);
+    $m_Lindigo_package$package$();
+    var diffuse = this.LHelloIndigo$__f_assetName;
+    var lighting = $m_Lindigo_shared_materials_LightingModel$Unlit$();
+    var shaderId = $m_s_None$();
+    var fillType = $s_Lindigo_shared_materials_FillType$__Normal__Lindigo_shared_materials_FillType();
+    var this$7 = $$x3.apply__Lindigo_shared_datatypes_Rectangle__I__Lindigo_shared_materials_Material__Lindigo_shared_scenegraph_Graphic($$x2, 1, new $c_Lindigo_shared_materials_Material$Bitmap(diffuse, lighting, shaderId, fillType));
+    var $$x4 = $m_Lindigo_package$package$().Lindigo_package$package$__f_Rectangle;
+    $m_s_package$();
+    var elems = $m_sr_ScalaRunTime$().wrapIntArray__AI__sci_ArraySeq(new $ac_I(new Int32Array([0, 12, 24])));
+    var this$6 = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(elems);
+    var this$5 = $m_s_util_Random$();
+    var n = this$5.s_util_Random__f_self.nextInt__I__I(3);
+    var newCrop = $$x4.apply__I__I__I__I__Lindigo_shared_datatypes_Rectangle($uI($f_sc_LinearSeqOps__apply__I__O(this$6, n)), 0, 12, 12);
+    var material = this$7.Lindigo_shared_scenegraph_Graphic__f_material;
+    var position = this$7.Lindigo_shared_scenegraph_Graphic__f_position;
+    var rotation = this$7.Lindigo_shared_scenegraph_Graphic__f_rotation;
+    var scale = this$7.Lindigo_shared_scenegraph_Graphic__f_scale;
+    var depth = this$7.Lindigo_shared_scenegraph_Graphic__f_depth;
+    var ref = this$7.Lindigo_shared_scenegraph_Graphic__f_ref;
+    var flip = this$7.Lindigo_shared_scenegraph_Graphic__f_flip;
+    var this$11 = new $c_Lindigo_shared_scenegraph_Graphic(material, newCrop, position, rotation, scale, depth, ref, flip).withRef__I__I__Lindigo_shared_scenegraph_Graphic(6, 6);
+    $m_Lindigo_shared_temporal_Signal$package$Signal$();
+    var this$8 = $m_Lindigo_shared_temporal_Signal$package$Signal$();
+    var s = $m_Lindigo_package$package$().Lindigo_package$package$__f_Signal.Orbit__Lindigo_shared_datatypes_Point__D__F1(this.LHelloIndigo$__f_config.Lindigo_shared_config_GameConfig__f_viewport.giveDimensions__I__Lindigo_shared_datatypes_Rectangle(1).center__Lindigo_shared_datatypes_Point(), 30.0);
+    var t = context.Lindigo_shared_FrameContext__f_gameTime.Lindigo_shared_time_GameTime__f_running;
+    var arg1 = this$8.at__F1__D__O(s, t);
+    var _$2 = $as_Lindigo_shared_datatypes_Vector2(arg1);
+    $m_Lindigo_shared_datatypes_Point$();
+    var x = $doubleToInt(_$2.Lindigo_shared_datatypes_Vector2__f_x);
+    var y = $doubleToInt(_$2.Lindigo_shared_datatypes_Vector2__f_y);
+    var pt = new $c_Lindigo_shared_datatypes_Point(x, y);
+    var material$1 = this$11.Lindigo_shared_scenegraph_Graphic__f_material;
+    var crop = this$11.Lindigo_shared_scenegraph_Graphic__f_crop;
+    var rotation$1 = this$11.Lindigo_shared_scenegraph_Graphic__f_rotation;
+    var scale$1 = this$11.Lindigo_shared_scenegraph_Graphic__f_scale;
+    var depth$1 = this$11.Lindigo_shared_scenegraph_Graphic__f_depth;
+    var ref$1 = this$11.Lindigo_shared_scenegraph_Graphic__f_ref;
+    var flip$1 = this$11.Lindigo_shared_scenegraph_Graphic__f_flip;
+    var nodes = $$x5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lindigo_shared_scenegraph_SceneNode.getArrayOf().constr)([new $c_Lindigo_shared_scenegraph_Graphic(material$1, crop, pt, rotation$1, scale$1, depth$1, ref$1, flip$1)]));
+    var state = $m_Lindigo_shared_scenegraph_SceneUpdateFragment$().apply__sci_List__Lindigo_shared_scenegraph_SceneUpdateFragment(($m_sci_List$(), $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(nodes)));
     var globalEvents = $m_s_package$().s_package$__f_Nil;
     var $$x1 = new $c_Lindigo_shared_Outcome$Result(state, globalEvents)
   } catch (e) {
@@ -27226,6 +27393,17 @@ $h_Lindigo_shared_scenegraph_Graphic$.prototype = $c_Lindigo_shared_scenegraph_G
 $c_Lindigo_shared_scenegraph_Graphic$.prototype.toString__T = (function() {
   return "Graphic"
 });
+$c_Lindigo_shared_scenegraph_Graphic$.prototype.apply__Lindigo_shared_datatypes_Rectangle__I__Lindigo_shared_materials_Material__Lindigo_shared_scenegraph_Graphic = (function(bounds, depth, material) {
+  $m_Lindigo_shared_datatypes_Radians$package$Radians$();
+  $m_Lindigo_shared_datatypes_Radians$package$Radians$();
+  var rotation$6 = 0.0;
+  var scale$6 = $m_Lindigo_shared_datatypes_Vector2$().Lindigo_shared_datatypes_Vector2$__f_one;
+  $m_Lindigo_shared_datatypes_Depth$package$Depth$();
+  var ref$6 = $m_Lindigo_shared_datatypes_Point$().Lindigo_shared_datatypes_Point$__f_zero;
+  var flip$6 = $m_Lindigo_shared_datatypes_Flip$().Lindigo_shared_datatypes_Flip$__f_default;
+  var position = bounds.Lindigo_shared_datatypes_Rectangle__f_position;
+  return new $c_Lindigo_shared_scenegraph_Graphic(material, bounds, position, rotation$6, scale$6, depth, ref$6, flip$6)
+});
 var $d_Lindigo_shared_scenegraph_Graphic$ = new $TypeData().initClass({
   Lindigo_shared_scenegraph_Graphic$: 0
 }, false, "indigo.shared.scenegraph.Graphic$", {
@@ -27501,6 +27679,26 @@ $h_Lindigo_shared_scenegraph_SceneUpdateFragment$.prototype = $c_Lindigo_shared_
 $c_Lindigo_shared_scenegraph_SceneUpdateFragment$.prototype.toString__T = (function() {
   return "SceneUpdateFragment"
 });
+$c_Lindigo_shared_scenegraph_SceneUpdateFragment$.prototype.apply__sci_List__Lindigo_shared_scenegraph_SceneUpdateFragment = (function(nodes) {
+  $m_Lindigo_shared_scenegraph_SceneUpdateFragment$();
+  $m_s_package$();
+  var $$x1 = $m_sr_ScalaRunTime$();
+  var lights = $m_s_package$().s_package$__f_Nil;
+  var key = $m_s_None$();
+  var magnification = $m_s_None$();
+  var depth = $m_s_None$();
+  var visible = $m_s_None$();
+  var blending = $m_s_None$();
+  var camera = $m_s_None$();
+  var elems = $$x1.wrapRefArray__AO__sci_ArraySeq(new ($d_Lindigo_shared_scenegraph_Layer.getArrayOf().constr)([new $c_Lindigo_shared_scenegraph_Layer(nodes, lights, key, magnification, depth, visible, blending, camera)]));
+  var layers = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(elems);
+  var lights$1 = $m_s_package$().s_package$__f_Nil;
+  var audio = $m_Lindigo_shared_scenegraph_SceneAudio$().Lindigo_shared_scenegraph_SceneAudio$__f_None;
+  var blendMaterial = $m_s_None$();
+  var cloneBlanks = $m_s_package$().s_package$__f_Nil;
+  var camera$1 = $m_s_None$();
+  return new $c_Lindigo_shared_scenegraph_SceneUpdateFragment(layers, lights$1, audio, blendMaterial, cloneBlanks, camera$1)
+});
 $c_Lindigo_shared_scenegraph_SceneUpdateFragment$.prototype.append__Lindigo_shared_scenegraph_SceneUpdateFragment__Lindigo_shared_scenegraph_SceneUpdateFragment__Lindigo_shared_scenegraph_SceneUpdateFragment = (function(a, b) {
   $m_Lindigo_shared_scenegraph_SceneUpdateFragment$();
   var this$1 = b.Lindigo_shared_scenegraph_SceneUpdateFragment__f_layers;
@@ -27532,15 +27730,15 @@ $c_Lindigo_shared_scenegraph_SceneUpdateFragment$.prototype.append__Lindigo_shar
   return new $c_Lindigo_shared_scenegraph_SceneUpdateFragment(layers, lights, audio, blendMaterial, cloneBlanks, camera)
 });
 $c_Lindigo_shared_scenegraph_SceneUpdateFragment$.prototype.addLayer__sci_List__Lindigo_shared_scenegraph_Layer__sci_List = (function(layers, layer) {
-  var this$1 = layer.key__s_Option();
+  var this$1 = layer.Lindigo_shared_scenegraph_Layer__f_key;
   if ((!this$1.isEmpty__Z())) {
     _return: {
       var these = layers;
       while ((!these.isEmpty__Z())) {
         var arg1 = these.head__O();
         var _$2 = $as_Lindigo_shared_scenegraph_Layer(arg1);
-        var x = _$2.key__s_Option();
-        var x$2 = layer.key__s_Option();
+        var x = _$2.Lindigo_shared_scenegraph_Layer__f_key;
+        var x$2 = layer.Lindigo_shared_scenegraph_Layer__f_key;
         if (((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))) {
           var $$x1 = true;
           break _return
@@ -27555,8 +27753,8 @@ $c_Lindigo_shared_scenegraph_SceneUpdateFragment$.prototype.addLayer__sci_List__
   if ($$x1) {
     var f = ((this$2, layer$3) => ((l) => {
       var l$1 = $as_Lindigo_shared_scenegraph_Layer(l);
-      var x$1 = l$1.key__s_Option();
-      var x$2$1 = layer$3.key__s_Option();
+      var x$1 = l$1.Lindigo_shared_scenegraph_Layer__f_key;
+      var x$2$1 = layer$3.Lindigo_shared_scenegraph_Layer__f_key;
       if (((x$1 === null) ? (x$2$1 === null) : x$1.equals__O__Z(x$2$1))) {
         return l$1.$bar$plus$bar__Lindigo_shared_scenegraph_Layer__Lindigo_shared_scenegraph_Layer(layer$3)
       } else {
@@ -31718,6 +31916,34 @@ var $d_sjsr_AnonFunction3 = new $TypeData().initClass({
   F3: 1
 });
 $c_sjsr_AnonFunction3.prototype.$classData = $d_sjsr_AnonFunction3;
+/** @constructor */
+function $c_s_util_Random$() {
+  this.s_util_Random__f_self = null;
+  $ct_s_util_Random__ju_Random__(this, $ct_ju_Random__(new $c_ju_Random()))
+}
+$c_s_util_Random$.prototype = new $h_s_util_Random();
+$c_s_util_Random$.prototype.constructor = $c_s_util_Random$;
+/** @constructor */
+function $h_s_util_Random$() {
+  /*<skip>*/
+}
+$h_s_util_Random$.prototype = $c_s_util_Random$.prototype;
+var $d_s_util_Random$ = new $TypeData().initClass({
+  s_util_Random$: 0
+}, false, "scala.util.Random$", {
+  s_util_Random$: 1,
+  s_util_Random: 1,
+  O: 1,
+  Ljava_io_Serializable: 1
+});
+$c_s_util_Random$.prototype.$classData = $d_s_util_Random$;
+var $n_s_util_Random$;
+function $m_s_util_Random$() {
+  if ((!$n_s_util_Random$)) {
+    $n_s_util_Random$ = new $c_s_util_Random$()
+  };
+  return $n_s_util_Random$
+}
 function $as_s_util_control_ControlThrowable(obj) {
   return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "scala.util.control.ControlThrowable"))
 }
@@ -33750,6 +33976,9 @@ $c_Lindigo_shared_config_GameViewport.prototype.productElement__I__O = (function
   };
   throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n))
 });
+$c_Lindigo_shared_config_GameViewport.prototype.giveDimensions__I__Lindigo_shared_datatypes_Rectangle = (function(magnification) {
+  return $m_Lindigo_shared_datatypes_Rectangle$().apply__I__I__I__I__Lindigo_shared_datatypes_Rectangle(0, 0, $intDiv(this.Lindigo_shared_config_GameViewport__f_width, magnification), $intDiv(this.Lindigo_shared_config_GameViewport__f_height, magnification))
+});
 function $as_Lindigo_shared_config_GameViewport(obj) {
   return (((obj instanceof $c_Lindigo_shared_config_GameViewport) || (obj === null)) ? obj : $throwClassCastException(obj, "indigo.shared.config.GameViewport"))
 }
@@ -34674,6 +34903,30 @@ $c_Lindigo_shared_datatypes_Rectangle.prototype.height__I = (function() {
     this.Lindigo_shared_datatypes_Rectangle__f_heightbitmap$1 = true
   };
   return this.Lindigo_shared_datatypes_Rectangle__f_height$lzy1
+});
+$c_Lindigo_shared_datatypes_Rectangle.prototype.horizontalCenter__I = (function() {
+  if ((!this.Lindigo_shared_datatypes_Rectangle__f_horizontalCenterbitmap$1)) {
+    this.Lindigo_shared_datatypes_Rectangle__f_horizontalCenter$lzy1 = ((this.x__I() + ((this.width__I() / 2) | 0)) | 0);
+    this.Lindigo_shared_datatypes_Rectangle__f_horizontalCenterbitmap$1 = true
+  };
+  return this.Lindigo_shared_datatypes_Rectangle__f_horizontalCenter$lzy1
+});
+$c_Lindigo_shared_datatypes_Rectangle.prototype.verticalCenter__I = (function() {
+  if ((!this.Lindigo_shared_datatypes_Rectangle__f_verticalCenterbitmap$1)) {
+    this.Lindigo_shared_datatypes_Rectangle__f_verticalCenter$lzy1 = ((this.y__I() + ((this.height__I() / 2) | 0)) | 0);
+    this.Lindigo_shared_datatypes_Rectangle__f_verticalCenterbitmap$1 = true
+  };
+  return this.Lindigo_shared_datatypes_Rectangle__f_verticalCenter$lzy1
+});
+$c_Lindigo_shared_datatypes_Rectangle.prototype.center__Lindigo_shared_datatypes_Point = (function() {
+  if ((!this.Lindigo_shared_datatypes_Rectangle__f_centerbitmap$1)) {
+    $m_Lindigo_shared_datatypes_Point$();
+    var x = this.horizontalCenter__I();
+    var y = this.verticalCenter__I();
+    this.Lindigo_shared_datatypes_Rectangle__f_center$lzy1 = new $c_Lindigo_shared_datatypes_Point(x, y);
+    this.Lindigo_shared_datatypes_Rectangle__f_centerbitmap$1 = true
+  };
+  return this.Lindigo_shared_datatypes_Rectangle__f_center$lzy1
 });
 $c_Lindigo_shared_datatypes_Rectangle.prototype.toSquare__Lindigo_shared_datatypes_Rectangle = (function() {
   $m_Lindigo_shared_datatypes_Size$();
@@ -36832,8 +37085,168 @@ function $isArrayOf_Lindigo_shared_scenegraph_EntityNode(obj, depth) {
 function $asArrayOf_Lindigo_shared_scenegraph_EntityNode(obj, depth) {
   return (($isArrayOf_Lindigo_shared_scenegraph_EntityNode(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lindigo.shared.scenegraph.EntityNode;", depth))
 }
+/** @constructor */
+function $c_Lindigo_shared_scenegraph_Layer(nodes, lights, key, magnification, depth, visible, blending, camera) {
+  this.Lindigo_shared_scenegraph_Layer__f_nodes = null;
+  this.Lindigo_shared_scenegraph_Layer__f_lights = null;
+  this.Lindigo_shared_scenegraph_Layer__f_key = null;
+  this.Lindigo_shared_scenegraph_Layer__f_magnification = null;
+  this.Lindigo_shared_scenegraph_Layer__f_depth = null;
+  this.Lindigo_shared_scenegraph_Layer__f_visible = null;
+  this.Lindigo_shared_scenegraph_Layer__f_blending = null;
+  this.Lindigo_shared_scenegraph_Layer__f_camera = null;
+  this.Lindigo_shared_scenegraph_Layer__f_nodes = nodes;
+  this.Lindigo_shared_scenegraph_Layer__f_lights = lights;
+  this.Lindigo_shared_scenegraph_Layer__f_key = key;
+  this.Lindigo_shared_scenegraph_Layer__f_magnification = magnification;
+  this.Lindigo_shared_scenegraph_Layer__f_depth = depth;
+  this.Lindigo_shared_scenegraph_Layer__f_visible = visible;
+  this.Lindigo_shared_scenegraph_Layer__f_blending = blending;
+  this.Lindigo_shared_scenegraph_Layer__f_camera = camera
+}
+$c_Lindigo_shared_scenegraph_Layer.prototype = new $h_O();
+$c_Lindigo_shared_scenegraph_Layer.prototype.constructor = $c_Lindigo_shared_scenegraph_Layer;
+/** @constructor */
+function $h_Lindigo_shared_scenegraph_Layer() {
+  /*<skip>*/
+}
+$h_Lindigo_shared_scenegraph_Layer.prototype = $c_Lindigo_shared_scenegraph_Layer.prototype;
+$c_Lindigo_shared_scenegraph_Layer.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this)
+});
+$c_Lindigo_shared_scenegraph_Layer.prototype.hashCode__I = (function() {
+  var this$2 = $m_s_util_hashing_MurmurHash3$();
+  return this$2.productHash__s_Product__I__Z__I(this, (-889275714), false)
+});
+$c_Lindigo_shared_scenegraph_Layer.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true
+  } else if ((x$0 instanceof $c_Lindigo_shared_scenegraph_Layer)) {
+    var x$0$2 = $as_Lindigo_shared_scenegraph_Layer(x$0);
+    var x = this.Lindigo_shared_scenegraph_Layer__f_nodes;
+    var x$2 = x$0$2.Lindigo_shared_scenegraph_Layer__f_nodes;
+    if (((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))) {
+      var x$3 = this.Lindigo_shared_scenegraph_Layer__f_lights;
+      var x$4 = x$0$2.Lindigo_shared_scenegraph_Layer__f_lights;
+      var $$x6 = ((x$3 === null) ? (x$4 === null) : x$3.equals__O__Z(x$4))
+    } else {
+      var $$x6 = false
+    };
+    if ($$x6) {
+      var x$5 = this.Lindigo_shared_scenegraph_Layer__f_key;
+      var x$6 = x$0$2.Lindigo_shared_scenegraph_Layer__f_key;
+      var $$x5 = ((x$5 === null) ? (x$6 === null) : x$5.equals__O__Z(x$6))
+    } else {
+      var $$x5 = false
+    };
+    if ($$x5) {
+      var x$7 = this.Lindigo_shared_scenegraph_Layer__f_magnification;
+      var x$8 = x$0$2.Lindigo_shared_scenegraph_Layer__f_magnification;
+      var $$x4 = ((x$7 === null) ? (x$8 === null) : x$7.equals__O__Z(x$8))
+    } else {
+      var $$x4 = false
+    };
+    if ($$x4) {
+      var x$9 = this.Lindigo_shared_scenegraph_Layer__f_depth;
+      var x$10 = x$0$2.Lindigo_shared_scenegraph_Layer__f_depth;
+      var $$x3 = ((x$9 === null) ? (x$10 === null) : x$9.equals__O__Z(x$10))
+    } else {
+      var $$x3 = false
+    };
+    if ($$x3) {
+      var x$11 = this.Lindigo_shared_scenegraph_Layer__f_visible;
+      var x$12 = x$0$2.Lindigo_shared_scenegraph_Layer__f_visible;
+      var $$x2 = ((x$11 === null) ? (x$12 === null) : x$11.equals__O__Z(x$12))
+    } else {
+      var $$x2 = false
+    };
+    if ($$x2) {
+      var x$13 = this.Lindigo_shared_scenegraph_Layer__f_blending;
+      var x$14 = x$0$2.Lindigo_shared_scenegraph_Layer__f_blending;
+      var $$x1 = ((x$13 === null) ? (x$14 === null) : x$13.equals__O__Z(x$14))
+    } else {
+      var $$x1 = false
+    };
+    if ($$x1) {
+      var x$15 = this.Lindigo_shared_scenegraph_Layer__f_camera;
+      var x$16 = x$0$2.Lindigo_shared_scenegraph_Layer__f_camera;
+      return ((x$15 === null) ? (x$16 === null) : x$15.equals__O__Z(x$16))
+    } else {
+      return false
+    }
+  } else {
+    return false
+  }
+});
+$c_Lindigo_shared_scenegraph_Layer.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this)
+});
+$c_Lindigo_shared_scenegraph_Layer.prototype.productArity__I = (function() {
+  return 8
+});
+$c_Lindigo_shared_scenegraph_Layer.prototype.productPrefix__T = (function() {
+  return "Layer"
+});
+$c_Lindigo_shared_scenegraph_Layer.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lindigo_shared_scenegraph_Layer__f_nodes;
+      break
+    }
+    case 1: {
+      return this.Lindigo_shared_scenegraph_Layer__f_lights;
+      break
+    }
+    case 2: {
+      return this.Lindigo_shared_scenegraph_Layer__f_key;
+      break
+    }
+    case 3: {
+      return this.Lindigo_shared_scenegraph_Layer__f_magnification;
+      break
+    }
+    case 4: {
+      return this.Lindigo_shared_scenegraph_Layer__f_depth;
+      break
+    }
+    case 5: {
+      return this.Lindigo_shared_scenegraph_Layer__f_visible;
+      break
+    }
+    case 6: {
+      return this.Lindigo_shared_scenegraph_Layer__f_blending;
+      break
+    }
+    case 7: {
+      return this.Lindigo_shared_scenegraph_Layer__f_camera;
+      break
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n))
+    }
+  }
+});
+$c_Lindigo_shared_scenegraph_Layer.prototype.$bar$plus$bar__Lindigo_shared_scenegraph_Layer__Lindigo_shared_scenegraph_Layer = (function(other) {
+  var this$1 = this.Lindigo_shared_scenegraph_Layer__f_nodes;
+  var suffix = other.Lindigo_shared_scenegraph_Layer__f_nodes;
+  var nodes$1 = this$1.appendedAll__sc_IterableOnce__sci_List(suffix);
+  var this$2 = this.Lindigo_shared_scenegraph_Layer__f_key;
+  var key$1 = (this$2.isEmpty__Z() ? other.Lindigo_shared_scenegraph_Layer__f_key : this$2);
+  var this$3 = this.Lindigo_shared_scenegraph_Layer__f_magnification;
+  var magnification$1 = (this$3.isEmpty__Z() ? other.Lindigo_shared_scenegraph_Layer__f_magnification : this$3);
+  var this$4 = this.Lindigo_shared_scenegraph_Layer__f_depth;
+  var depth$1 = (this$4.isEmpty__Z() ? other.Lindigo_shared_scenegraph_Layer__f_depth : this$4);
+  var this$5 = this.Lindigo_shared_scenegraph_Layer__f_visible;
+  var visible$1 = (this$5.isEmpty__Z() ? other.Lindigo_shared_scenegraph_Layer__f_visible : this$5);
+  var this$6 = this.Lindigo_shared_scenegraph_Layer__f_blending;
+  var blending$1 = (this$6.isEmpty__Z() ? other.Lindigo_shared_scenegraph_Layer__f_blending : this$6);
+  var this$7 = this.Lindigo_shared_scenegraph_Layer__f_camera;
+  var camera$1 = (this$7.isEmpty__Z() ? other.Lindigo_shared_scenegraph_Layer__f_camera : this$7);
+  var lights$1 = this.Lindigo_shared_scenegraph_Layer__f_lights;
+  return new $c_Lindigo_shared_scenegraph_Layer(nodes$1, lights$1, key$1, magnification$1, depth$1, visible$1, blending$1, camera$1)
+});
 function $as_Lindigo_shared_scenegraph_Layer(obj) {
-  return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "indigo.shared.scenegraph.Layer"))
+  return (((obj instanceof $c_Lindigo_shared_scenegraph_Layer) || (obj === null)) ? obj : $throwClassCastException(obj, "indigo.shared.scenegraph.Layer"))
 }
 function $isArrayOf_Lindigo_shared_scenegraph_Layer(obj, depth) {
   return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lindigo_shared_scenegraph_Layer)))
@@ -36841,6 +37254,16 @@ function $isArrayOf_Lindigo_shared_scenegraph_Layer(obj, depth) {
 function $asArrayOf_Lindigo_shared_scenegraph_Layer(obj, depth) {
   return (($isArrayOf_Lindigo_shared_scenegraph_Layer(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lindigo.shared.scenegraph.Layer;", depth))
 }
+var $d_Lindigo_shared_scenegraph_Layer = new $TypeData().initClass({
+  Lindigo_shared_scenegraph_Layer: 0
+}, false, "indigo.shared.scenegraph.Layer", {
+  Lindigo_shared_scenegraph_Layer: 1,
+  O: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lindigo_shared_scenegraph_Layer.prototype.$classData = $d_Lindigo_shared_scenegraph_Layer;
 /** @constructor */
 function $c_Lindigo_shared_scenegraph_SceneAudio(sourceA, sourceB, sourceC) {
   this.Lindigo_shared_scenegraph_SceneAudio__f_sourceA = null;
@@ -42315,6 +42738,163 @@ function $asArrayOf_Lindigo_shared_materials_LightingModel$Lit(obj, depth) {
   return (($isArrayOf_Lindigo_shared_materials_LightingModel$Lit(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lindigo.shared.materials.LightingModel$Lit;", depth))
 }
 /** @constructor */
+function $c_Lindigo_shared_materials_Material$Bitmap(diffuse, lighting, shaderId, fillType) {
+  this.Lindigo_shared_materials_Material$Bitmap__f_diffuse = null;
+  this.Lindigo_shared_materials_Material$Bitmap__f_lighting = null;
+  this.Lindigo_shared_materials_Material$Bitmap__f_shaderId = null;
+  this.Lindigo_shared_materials_Material$Bitmap__f_fillType = null;
+  this.Lindigo_shared_materials_Material$Bitmap__f_diffuse = diffuse;
+  this.Lindigo_shared_materials_Material$Bitmap__f_lighting = lighting;
+  this.Lindigo_shared_materials_Material$Bitmap__f_shaderId = shaderId;
+  this.Lindigo_shared_materials_Material$Bitmap__f_fillType = fillType
+}
+$c_Lindigo_shared_materials_Material$Bitmap.prototype = new $h_O();
+$c_Lindigo_shared_materials_Material$Bitmap.prototype.constructor = $c_Lindigo_shared_materials_Material$Bitmap;
+/** @constructor */
+function $h_Lindigo_shared_materials_Material$Bitmap() {
+  /*<skip>*/
+}
+$h_Lindigo_shared_materials_Material$Bitmap.prototype = $c_Lindigo_shared_materials_Material$Bitmap.prototype;
+$c_Lindigo_shared_materials_Material$Bitmap.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this)
+});
+$c_Lindigo_shared_materials_Material$Bitmap.prototype.hashCode__I = (function() {
+  var this$2 = $m_s_util_hashing_MurmurHash3$();
+  return this$2.productHash__s_Product__I__Z__I(this, (-889275714), false)
+});
+$c_Lindigo_shared_materials_Material$Bitmap.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true
+  } else if ((x$0 instanceof $c_Lindigo_shared_materials_Material$Bitmap)) {
+    var x$0$2 = $as_Lindigo_shared_materials_Material$Bitmap(x$0);
+    if ((this.Lindigo_shared_materials_Material$Bitmap__f_diffuse === x$0$2.Lindigo_shared_materials_Material$Bitmap__f_diffuse)) {
+      var x = this.Lindigo_shared_materials_Material$Bitmap__f_lighting;
+      var x$2 = x$0$2.Lindigo_shared_materials_Material$Bitmap__f_lighting;
+      var $$x2 = (x === x$2)
+    } else {
+      var $$x2 = false
+    };
+    if ($$x2) {
+      var x$3 = this.Lindigo_shared_materials_Material$Bitmap__f_shaderId;
+      var x$4 = x$0$2.Lindigo_shared_materials_Material$Bitmap__f_shaderId;
+      var $$x1 = ((x$3 === null) ? (x$4 === null) : x$3.equals__O__Z(x$4))
+    } else {
+      var $$x1 = false
+    };
+    if ($$x1) {
+      var x$5 = this.Lindigo_shared_materials_Material$Bitmap__f_fillType;
+      var x$6 = x$0$2.Lindigo_shared_materials_Material$Bitmap__f_fillType;
+      return (x$5 === x$6)
+    } else {
+      return false
+    }
+  } else {
+    return false
+  }
+});
+$c_Lindigo_shared_materials_Material$Bitmap.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this)
+});
+$c_Lindigo_shared_materials_Material$Bitmap.prototype.productArity__I = (function() {
+  return 4
+});
+$c_Lindigo_shared_materials_Material$Bitmap.prototype.productPrefix__T = (function() {
+  return "Bitmap"
+});
+$c_Lindigo_shared_materials_Material$Bitmap.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lindigo_shared_materials_Material$Bitmap__f_diffuse;
+      break
+    }
+    case 1: {
+      return this.Lindigo_shared_materials_Material$Bitmap__f_lighting;
+      break
+    }
+    case 2: {
+      return this.Lindigo_shared_materials_Material$Bitmap__f_shaderId;
+      break
+    }
+    case 3: {
+      return this.Lindigo_shared_materials_Material$Bitmap__f_fillType;
+      break
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n))
+    }
+  }
+});
+$c_Lindigo_shared_materials_Material$Bitmap.prototype.toShaderData__Lindigo_shared_materials_ShaderData = (function() {
+  matchResult4: {
+    var imageFillType;
+    var x5 = this.Lindigo_shared_materials_Material$Bitmap__f_fillType;
+    var x = $s_Lindigo_shared_materials_FillType$__Normal__Lindigo_shared_materials_FillType();
+    if ((x === x5)) {
+      var imageFillType = 0.0;
+      break matchResult4
+    };
+    var x$3 = $s_Lindigo_shared_materials_FillType$__Stretch__Lindigo_shared_materials_FillType();
+    if ((x$3 === x5)) {
+      var imageFillType = 1.0;
+      break matchResult4
+    };
+    var x$5 = $s_Lindigo_shared_materials_FillType$__Tile__Lindigo_shared_materials_FillType();
+    if ((x$5 === x5)) {
+      var imageFillType = 2.0;
+      break matchResult4
+    };
+    throw new $c_s_MatchError(x5)
+  };
+  $m_s_package$();
+  var $$x1 = $m_sr_ScalaRunTime$();
+  var value = $fround(imageFillType);
+  var y = new $c_Lindigo_shared_shader_ShaderPrimitive$float(value);
+  var elems = $$x1.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("FILLTYPE", y)]));
+  var uniforms = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(elems);
+  var uniformBlock = new $c_Lindigo_shared_shader_UniformBlock("IndigoBitmapData", uniforms);
+  var x6 = this.Lindigo_shared_materials_Material$Bitmap__f_lighting;
+  var x$7 = $m_Lindigo_shared_materials_LightingModel$Unlit$();
+  if ((x$7 === x6)) {
+    var this$8 = this.Lindigo_shared_materials_Material$Bitmap__f_shaderId;
+    var shaderId = $as_T((this$8.isEmpty__Z() ? $m_Lindigo_shared_shader_StandardShaders$().Lindigo_shared_shader_StandardShaders$__f_Bitmap.Lindigo_shared_shader_EntityShader$Source__f_id : this$8.get__O()));
+    $m_s_package$();
+    var elems$1 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lindigo_shared_shader_UniformBlock.getArrayOf().constr)([uniformBlock]));
+    var uniformBlocks = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(elems$1);
+    var value$1 = this.Lindigo_shared_materials_Material$Bitmap__f_diffuse;
+    var channel0 = new $c_s_Some(value$1);
+    var channel1 = $m_s_None$();
+    var channel2 = $m_s_None$();
+    var channel3 = $m_s_None$();
+    return new $c_Lindigo_shared_materials_ShaderData(shaderId, uniformBlocks, channel0, channel1, channel2, channel3)
+  };
+  if (false) {
+    var l = $as_Lindigo_shared_materials_LightingModel$Lit(x6);
+    var this$12 = this.Lindigo_shared_materials_Material$Bitmap__f_shaderId;
+    return l.toShaderData__T__Lindigo_shared_materials_ShaderData($as_T((this$12.isEmpty__Z() ? $m_Lindigo_shared_shader_StandardShaders$().Lindigo_shared_shader_StandardShaders$__f_LitBitmap.Lindigo_shared_shader_EntityShader$Source__f_id : this$12.get__O()))).withChannel0__T__Lindigo_shared_materials_ShaderData(this.Lindigo_shared_materials_Material$Bitmap__f_diffuse)
+  };
+  throw new $c_s_MatchError(x6)
+});
+function $as_Lindigo_shared_materials_Material$Bitmap(obj) {
+  return (((obj instanceof $c_Lindigo_shared_materials_Material$Bitmap) || (obj === null)) ? obj : $throwClassCastException(obj, "indigo.shared.materials.Material$Bitmap"))
+}
+function $isArrayOf_Lindigo_shared_materials_Material$Bitmap(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lindigo_shared_materials_Material$Bitmap)))
+}
+function $asArrayOf_Lindigo_shared_materials_Material$Bitmap(obj, depth) {
+  return (($isArrayOf_Lindigo_shared_materials_Material$Bitmap(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lindigo.shared.materials.Material$Bitmap;", depth))
+}
+var $d_Lindigo_shared_materials_Material$Bitmap = new $TypeData().initClass({
+  Lindigo_shared_materials_Material$Bitmap: 0
+}, false, "indigo.shared.materials.Material$Bitmap", {
+  Lindigo_shared_materials_Material$Bitmap: 1,
+  O: 1,
+  Lindigo_shared_materials_Material: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lindigo_shared_materials_Material$Bitmap.prototype.$classData = $d_Lindigo_shared_materials_Material$Bitmap;
+/** @constructor */
 function $c_Lindigo_shared_materials_ShaderData(shaderId, uniformBlocks, channel0, channel1, channel2, channel3) {
   this.Lindigo_shared_materials_ShaderData__f_shaderId = null;
   this.Lindigo_shared_materials_ShaderData__f_uniformBlocks = null;
@@ -42436,6 +43016,18 @@ $c_Lindigo_shared_materials_ShaderData.prototype.addUniformBlock__sci_List__Lind
   var channel2$1 = this.Lindigo_shared_materials_ShaderData__f_channel2;
   var channel3$1 = this.Lindigo_shared_materials_ShaderData__f_channel3;
   return new $c_Lindigo_shared_materials_ShaderData(shaderId$1, uniformBlocks$1, channel0$1, channel1$1, channel2$1, channel3$1)
+});
+$c_Lindigo_shared_materials_ShaderData.prototype.withChannel0__T__Lindigo_shared_materials_ShaderData = (function(assetName) {
+  var channel0$2 = new $c_s_Some(assetName);
+  var shaderId$2 = this.Lindigo_shared_materials_ShaderData__f_shaderId;
+  var uniformBlocks$2 = this.Lindigo_shared_materials_ShaderData__f_uniformBlocks;
+  var channel1$2 = this.Lindigo_shared_materials_ShaderData__f_channel1;
+  var channel2$2 = this.Lindigo_shared_materials_ShaderData__f_channel2;
+  var channel3$2 = this.Lindigo_shared_materials_ShaderData__f_channel3;
+  return new $c_Lindigo_shared_materials_ShaderData(shaderId$2, uniformBlocks$2, channel0$2, channel1$2, channel2$2, channel3$2)
+});
+$c_Lindigo_shared_materials_ShaderData.prototype.toShaderData__Lindigo_shared_materials_ShaderData = (function() {
+  return this
 });
 function $as_Lindigo_shared_materials_ShaderData(obj) {
   return (((obj instanceof $c_Lindigo_shared_materials_ShaderData) || (obj === null)) ? obj : $throwClassCastException(obj, "indigo.shared.materials.ShaderData"))
@@ -48839,8 +49431,80 @@ var $d_Lindigo_shared_assets_AssetType$Font = new $TypeData().initClass({
   s_Product: 1,
   Ljava_io_Serializable: 1
 });
+/** @constructor */
+function $c_Lindigo_shared_assets_AssetType$Image(name, path, tag) {
+  this.Lindigo_shared_assets_AssetType$Image__f_name = null;
+  this.Lindigo_shared_assets_AssetType$Image__f_path = null;
+  this.Lindigo_shared_assets_AssetType$Image__f_tag = null;
+  this.Lindigo_shared_assets_AssetType$Image__f_name = name;
+  this.Lindigo_shared_assets_AssetType$Image__f_path = path;
+  this.Lindigo_shared_assets_AssetType$Image__f_tag = tag
+}
+$c_Lindigo_shared_assets_AssetType$Image.prototype = new $h_O();
+$c_Lindigo_shared_assets_AssetType$Image.prototype.constructor = $c_Lindigo_shared_assets_AssetType$Image;
+/** @constructor */
+function $h_Lindigo_shared_assets_AssetType$Image() {
+  /*<skip>*/
+}
+$h_Lindigo_shared_assets_AssetType$Image.prototype = $c_Lindigo_shared_assets_AssetType$Image.prototype;
+$c_Lindigo_shared_assets_AssetType$Image.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this)
+});
+$c_Lindigo_shared_assets_AssetType$Image.prototype.hashCode__I = (function() {
+  var this$2 = $m_s_util_hashing_MurmurHash3$();
+  return this$2.productHash__s_Product__I__Z__I(this, (-889275714), false)
+});
+$c_Lindigo_shared_assets_AssetType$Image.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true
+  } else if ((x$0 instanceof $c_Lindigo_shared_assets_AssetType$Image)) {
+    var x$0$2 = $as_Lindigo_shared_assets_AssetType$Image(x$0);
+    if (((this.Lindigo_shared_assets_AssetType$Image__f_name === x$0$2.Lindigo_shared_assets_AssetType$Image__f_name) && (this.Lindigo_shared_assets_AssetType$Image__f_path === x$0$2.Lindigo_shared_assets_AssetType$Image__f_path))) {
+      var x = this.Lindigo_shared_assets_AssetType$Image__f_tag;
+      var x$2 = x$0$2.Lindigo_shared_assets_AssetType$Image__f_tag;
+      return ((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))
+    } else {
+      return false
+    }
+  } else {
+    return false
+  }
+});
+$c_Lindigo_shared_assets_AssetType$Image.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this)
+});
+$c_Lindigo_shared_assets_AssetType$Image.prototype.productArity__I = (function() {
+  return 3
+});
+$c_Lindigo_shared_assets_AssetType$Image.prototype.productPrefix__T = (function() {
+  return "Image"
+});
+$c_Lindigo_shared_assets_AssetType$Image.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lindigo_shared_assets_AssetType$Image__f_name;
+      break
+    }
+    case 1: {
+      return this.Lindigo_shared_assets_AssetType$Image__f_path;
+      break
+    }
+    case 2: {
+      return this.Lindigo_shared_assets_AssetType$Image__f_tag;
+      break
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n))
+    }
+  }
+});
+$c_Lindigo_shared_assets_AssetType$Image.prototype.toList__sci_List = (function() {
+  $m_s_package$();
+  var elems = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lindigo_shared_assets_AssetType$Image.getArrayOf().constr)([this]));
+  return $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(elems)
+});
 function $as_Lindigo_shared_assets_AssetType$Image(obj) {
-  return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "indigo.shared.assets.AssetType$Image"))
+  return (((obj instanceof $c_Lindigo_shared_assets_AssetType$Image) || (obj === null)) ? obj : $throwClassCastException(obj, "indigo.shared.assets.AssetType$Image"))
 }
 function $isArrayOf_Lindigo_shared_assets_AssetType$Image(obj, depth) {
   return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lindigo_shared_assets_AssetType$Image)))
@@ -48859,6 +49523,7 @@ var $d_Lindigo_shared_assets_AssetType$Image = new $TypeData().initClass({
   s_Product: 1,
   Ljava_io_Serializable: 1
 });
+$c_Lindigo_shared_assets_AssetType$Image.prototype.$classData = $d_Lindigo_shared_assets_AssetType$Image;
 function $as_Lindigo_shared_assets_AssetType$Text(obj) {
   return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "indigo.shared.assets.AssetType$Text"))
 }
@@ -57131,8 +57796,153 @@ var $d_Lindigo_shared_scenegraph_BlendFactor$$anon$1 = new $TypeData().initClass
   s_deriving_Mirror$Singleton: 1
 });
 $c_Lindigo_shared_scenegraph_BlendFactor$$anon$1.prototype.$classData = $d_Lindigo_shared_scenegraph_BlendFactor$$anon$1;
+/** @constructor */
+function $c_Lindigo_shared_scenegraph_Graphic(material, crop, position, rotation, scale, depth, ref, flip) {
+  this.Lindigo_shared_scenegraph_Graphic__f_material = null;
+  this.Lindigo_shared_scenegraph_Graphic__f_crop = null;
+  this.Lindigo_shared_scenegraph_Graphic__f_position = null;
+  this.Lindigo_shared_scenegraph_Graphic__f_rotation = 0.0;
+  this.Lindigo_shared_scenegraph_Graphic__f_scale = null;
+  this.Lindigo_shared_scenegraph_Graphic__f_depth = 0;
+  this.Lindigo_shared_scenegraph_Graphic__f_ref = null;
+  this.Lindigo_shared_scenegraph_Graphic__f_flip = null;
+  this.Lindigo_shared_scenegraph_Graphic__f_size$lzy1 = null;
+  this.Lindigo_shared_scenegraph_Graphic__f_sizebitmap$1 = false;
+  this.Lindigo_shared_scenegraph_Graphic__f_x$lzy1 = 0;
+  this.Lindigo_shared_scenegraph_Graphic__f_xbitmap$1 = false;
+  this.Lindigo_shared_scenegraph_Graphic__f_y$lzy1 = 0;
+  this.Lindigo_shared_scenegraph_Graphic__f_ybitmap$1 = false;
+  this.Lindigo_shared_scenegraph_Graphic__f_material = material;
+  this.Lindigo_shared_scenegraph_Graphic__f_crop = crop;
+  this.Lindigo_shared_scenegraph_Graphic__f_position = position;
+  this.Lindigo_shared_scenegraph_Graphic__f_rotation = rotation;
+  this.Lindigo_shared_scenegraph_Graphic__f_scale = scale;
+  this.Lindigo_shared_scenegraph_Graphic__f_depth = depth;
+  this.Lindigo_shared_scenegraph_Graphic__f_ref = ref;
+  this.Lindigo_shared_scenegraph_Graphic__f_flip = flip
+}
+$c_Lindigo_shared_scenegraph_Graphic.prototype = new $h_O();
+$c_Lindigo_shared_scenegraph_Graphic.prototype.constructor = $c_Lindigo_shared_scenegraph_Graphic;
+/** @constructor */
+function $h_Lindigo_shared_scenegraph_Graphic() {
+  /*<skip>*/
+}
+$h_Lindigo_shared_scenegraph_Graphic.prototype = $c_Lindigo_shared_scenegraph_Graphic.prototype;
+$c_Lindigo_shared_scenegraph_Graphic.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this)
+});
+$c_Lindigo_shared_scenegraph_Graphic.prototype.hashCode__I = (function() {
+  var this$2 = $m_s_util_hashing_MurmurHash3$();
+  return this$2.productHash__s_Product__I__Z__I(this, (-889275714), false)
+});
+$c_Lindigo_shared_scenegraph_Graphic.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true
+  } else if ((x$0 instanceof $c_Lindigo_shared_scenegraph_Graphic)) {
+    var x$0$2 = $as_Lindigo_shared_scenegraph_Graphic(x$0);
+    var x = this.Lindigo_shared_scenegraph_Graphic__f_material;
+    var x$2 = x$0$2.Lindigo_shared_scenegraph_Graphic__f_material;
+    if (((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))) {
+      var x$3 = this.Lindigo_shared_scenegraph_Graphic__f_crop;
+      var x$4 = x$0$2.Lindigo_shared_scenegraph_Graphic__f_crop;
+      var $$x4 = ((x$3 === null) ? (x$4 === null) : x$3.equals__O__Z(x$4))
+    } else {
+      var $$x4 = false
+    };
+    if ($$x4) {
+      var x$5 = this.Lindigo_shared_scenegraph_Graphic__f_position;
+      var x$6 = x$0$2.Lindigo_shared_scenegraph_Graphic__f_position;
+      var $$x3 = ((x$5 === null) ? (x$6 === null) : x$5.equals__O__Z(x$6))
+    } else {
+      var $$x3 = false
+    };
+    if (($$x3 && (this.Lindigo_shared_scenegraph_Graphic__f_rotation === x$0$2.Lindigo_shared_scenegraph_Graphic__f_rotation))) {
+      var x$7 = this.Lindigo_shared_scenegraph_Graphic__f_scale;
+      var x$8 = x$0$2.Lindigo_shared_scenegraph_Graphic__f_scale;
+      var $$x2 = ((x$7 === null) ? (x$8 === null) : x$7.equals__O__Z(x$8))
+    } else {
+      var $$x2 = false
+    };
+    if (($$x2 && (this.Lindigo_shared_scenegraph_Graphic__f_depth === x$0$2.Lindigo_shared_scenegraph_Graphic__f_depth))) {
+      var x$9 = this.Lindigo_shared_scenegraph_Graphic__f_ref;
+      var x$10 = x$0$2.Lindigo_shared_scenegraph_Graphic__f_ref;
+      var $$x1 = ((x$9 === null) ? (x$10 === null) : x$9.equals__O__Z(x$10))
+    } else {
+      var $$x1 = false
+    };
+    if ($$x1) {
+      var x$11 = this.Lindigo_shared_scenegraph_Graphic__f_flip;
+      var x$12 = x$0$2.Lindigo_shared_scenegraph_Graphic__f_flip;
+      return ((x$11 === null) ? (x$12 === null) : x$11.equals__O__Z(x$12))
+    } else {
+      return false
+    }
+  } else {
+    return false
+  }
+});
+$c_Lindigo_shared_scenegraph_Graphic.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this)
+});
+$c_Lindigo_shared_scenegraph_Graphic.prototype.productArity__I = (function() {
+  return 8
+});
+$c_Lindigo_shared_scenegraph_Graphic.prototype.productPrefix__T = (function() {
+  return "Graphic"
+});
+$c_Lindigo_shared_scenegraph_Graphic.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lindigo_shared_scenegraph_Graphic__f_material;
+      break
+    }
+    case 1: {
+      return this.Lindigo_shared_scenegraph_Graphic__f_crop;
+      break
+    }
+    case 2: {
+      return this.Lindigo_shared_scenegraph_Graphic__f_position;
+      break
+    }
+    case 3: {
+      return this.Lindigo_shared_scenegraph_Graphic__f_rotation;
+      break
+    }
+    case 4: {
+      return this.Lindigo_shared_scenegraph_Graphic__f_scale;
+      break
+    }
+    case 5: {
+      return this.Lindigo_shared_scenegraph_Graphic__f_depth;
+      break
+    }
+    case 6: {
+      return this.Lindigo_shared_scenegraph_Graphic__f_ref;
+      break
+    }
+    case 7: {
+      return this.Lindigo_shared_scenegraph_Graphic__f_flip;
+      break
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n))
+    }
+  }
+});
+$c_Lindigo_shared_scenegraph_Graphic.prototype.withRef__I__I__Lindigo_shared_scenegraph_Graphic = (function(x, y) {
+  $m_Lindigo_shared_datatypes_Point$();
+  var newRef = new $c_Lindigo_shared_datatypes_Point(x, y);
+  var material = this.Lindigo_shared_scenegraph_Graphic__f_material;
+  var crop = this.Lindigo_shared_scenegraph_Graphic__f_crop;
+  var position = this.Lindigo_shared_scenegraph_Graphic__f_position;
+  var rotation = this.Lindigo_shared_scenegraph_Graphic__f_rotation;
+  var scale = this.Lindigo_shared_scenegraph_Graphic__f_scale;
+  var depth = this.Lindigo_shared_scenegraph_Graphic__f_depth;
+  var flip = this.Lindigo_shared_scenegraph_Graphic__f_flip;
+  return new $c_Lindigo_shared_scenegraph_Graphic(material, crop, position, rotation, scale, depth, newRef, flip)
+});
 function $as_Lindigo_shared_scenegraph_Graphic(obj) {
-  return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "indigo.shared.scenegraph.Graphic"))
+  return (((obj instanceof $c_Lindigo_shared_scenegraph_Graphic) || (obj === null)) ? obj : $throwClassCastException(obj, "indigo.shared.scenegraph.Graphic"))
 }
 function $isArrayOf_Lindigo_shared_scenegraph_Graphic(obj, depth) {
   return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lindigo_shared_scenegraph_Graphic)))
@@ -57140,6 +57950,22 @@ function $isArrayOf_Lindigo_shared_scenegraph_Graphic(obj, depth) {
 function $asArrayOf_Lindigo_shared_scenegraph_Graphic(obj, depth) {
   return (($isArrayOf_Lindigo_shared_scenegraph_Graphic(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lindigo.shared.scenegraph.Graphic;", depth))
 }
+var $d_Lindigo_shared_scenegraph_Graphic = new $TypeData().initClass({
+  Lindigo_shared_scenegraph_Graphic: 0
+}, false, "indigo.shared.scenegraph.Graphic", {
+  Lindigo_shared_scenegraph_Graphic: 1,
+  O: 1,
+  Lindigo_shared_scenegraph_SceneGraphNode: 1,
+  Lindigo_shared_scenegraph_SceneNode: 1,
+  Lindigo_shared_scenegraph_RenderNode: 1,
+  Lindigo_shared_scenegraph_Cloneable: 1,
+  Lindigo_shared_scenegraph_BasicSpatialModifiers: 1,
+  Lindigo_shared_scenegraph_SpatialModifiers: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lindigo_shared_scenegraph_Graphic.prototype.$classData = $d_Lindigo_shared_scenegraph_Graphic;
 /** @constructor */
 function $c_Lindigo_shared_scenegraph_PlaybackPattern$$anon$1() {
   /*<skip>*/

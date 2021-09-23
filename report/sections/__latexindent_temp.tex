@@ -1,0 +1,82 @@
+\section{Requisiti}
+
+\subsection{Requisiti di business}
+Requirement di alto livello stabiliscono perché si sta facendo 
+il sistema e quali siano i suoi vantaggi. 
+
+\subsection{Requisiti utente}
+Quando un utente usa il sistema, cosa vuole fare e cosa si aspetta?
+Raccolgono le aspettative per un utente.
+Un modo tipico per documentare i requisiti utente sono le user stories.
+
+\subsection{Requisiti funzionali}
+Funzionali: statement dettagliati delle funzionalità del sistema indicate
+in modo chiaro (organizzarli permette uno sviluppo del progetto rigoroso)
+\begin{enumerate}
+    \item Generazione in modo casuale di una mappa 2D formata da più stanze
+    \item Ogni stanza è generata in modo casuale e può essere di diversa tipologia:
+        \begin{enumerate}
+            \item stanza con 1 oggetto
+            \item stanza con nemici ed elementi bloccanti
+            \item stanza con boss (1 sola nella mappa)
+        \end{enumerate}
+    \item Personaggio con caratteristiche e punti vita
+    \item Controllo del personaggio tramite movimento e sparo
+    \item Diversi tipi di nemici con diverse tipologie di movimento: casuale o intelligente
+    \item Diversi tipi di oggetti per potenziare le caratteristiche del personaggio
+    \item Menù di gioco
+\end{enumerate}
+
+\begin{enumerate}
+    \item Generazione di una mappa 2D in maniera procedurale formata da più stanze
+    \begin{enumerate}
+        \item Ogni stanza è generata in maniera procedurale
+        \item Una stanza è di diverse tipologie
+        \begin{enumerate}
+            \item Stanza con 1 oggetto
+            \item Stanza con nemici ed elementi bloccanti
+            \item Stanza con boss (1 sola nella mappa)
+        \end{enumerate}
+            \item Una stanza ha due porte utilizzate per l'entrata e l'uscita del giocatore
+            \begin{enumerate}
+            \item All'entrata del giocatore nella stanza, le porte si chiudono
+            \item Le porte di una stanza si aprono solamente quando il giocatore ha eliminato tutti i nemici all'interno
+        \end{enumerate}
+    \end{enumerate}
+    \item Personaggio con caratteristiche e punti vita controllato dall'utente
+    \begin{enumerate}
+        \item Il personaggio è controllato dall'utente
+        \begin{enumerate}
+            \item L'utente può muovere il personaggio nelle quattro direzioni principali (sopra, sotto, destra, sinistra)
+            \item L'utente può eseguire uno o più "shot" verso una delle quattro direzioni principali (sopra, sotto, destra, sinistra)
+        \end{enumerate}
+        \item Il personaggio può infliggere danno ai nemici
+        \begin{enumerate}
+            \item Il personaggio infligge danno ai nemici quando uno "shot" colpisce un nemico
+        \end{enumerate}
+        \item Il personaggio perde punti vita
+        \begin{enumerate}
+            \item Il personaggio è danneggiato, e i suoi punti vita diminuiscono, quando è toccato da un nemico
+        \end{enumerate}
+    \end{enumerate}
+    \item Nemici
+    \begin{enumerate}
+        \item Un nemico può avere 2 tipologie di movimento
+        \begin{enumerate}
+            \item Nemico con movimenti casuali all'interno di una stanza
+            \item Nemico con movimento in direzione del giocatore
+        \end{enumerate}
+        \item Un nemico è presente in una e una sola stanza, da cui non può uscire
+        \item Un nemico è danneggiato, e i suoi punti vita diminuiscono, quando è colpito da uno shot del giocatore
+    \end{enumerate}
+\end{enumerate}
+
+
+\subsection{Requisiti non funzionali}
+Non funzionali: statement dettagliati che raccolgono la qualità del 
+comportamento o sui vincoli del sistema
+
+\subsection{Requisiti di implementazione}
+Implementazione: requirement posti agli sviluppatori. Danno indicazioni 
+sul lavoro da fare. Possono comprendere: tipi di strumenti utilizzati, 
+modi di sviluppo, documentazione fornita.

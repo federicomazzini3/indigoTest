@@ -1,4 +1,7 @@
+import HelloIndigo.config
 import indigo._
+
+import scala.util.Random
 import scala.scalajs.js.annotation.JSExportTopLevel
 
 @JSExportTopLevel("IndigoGame")
@@ -8,7 +11,11 @@ object HelloIndigo extends IndigoSandbox[Unit, Unit] {
 
   val animations: Set[Animation] = Set()
 
-  val assets: Set[AssetType] = Set()
+  val assetName = AssetName("snake")
+
+  val assets: Set[indigo.AssetType] = Set(
+    AssetType.Image(assetName, AssetPath("assets/snake.png"))
+  )
 
   val fonts: Set[FontInfo] = Set()
 
@@ -34,6 +41,16 @@ object HelloIndigo extends IndigoSandbox[Unit, Unit] {
                model: Unit
              ): Outcome[SceneUpdateFragment] =
     Outcome(
-      SceneUpdateFragment.empty
+      SceneUpdateFragment(
+        Graphic(Rectangle(0, 0, 36, 12), 1, Material.Bitmap(assetName))
+          .withCrop(Rectangle(List(0,12,24)(Random.nextInt(3)), 0, 12, 12))
+          .withRef(6, 6)
+          .moveTo(
+            Signal
+              .Orbit(config.viewport.giveDimensions(1).center, 30)
+              .map(_.toPoint)
+              .at(context.gameTime.running)
+          )
+      )
     )
 }

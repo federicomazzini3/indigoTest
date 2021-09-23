@@ -8,6 +8,7 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{hyperref}
+\usepackage{xcolor}
 
 \definecolor{mygray}{rgb}{0.5,0.5,0.5} 
 
@@ -41,11 +42,16 @@
   filecolor=black      
 }
 
+
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+  
 \graphicspath{ {img/} }
 
 \textwidth=450pt\oddsidemargin=0pt
 
-\title{TBOI}
+\title{TBOI} 
 \author{Matteo Brocca, Alan Mancini, Federico Mazzini}
 \date{Settembre 2021}\let\Date
 
@@ -70,7 +76,7 @@
 	\textit{Autori}:\\  
 	Matteo Brocca $\cdot$ 1005681\\
 	Alan Mancini $\cdot$ 1005481\\
-	Federico Mazzino $\cdot$ XXXXXXX\\
+	Federico Mazzini $\cdot$ XXXXXXX\\
 }}
 \end{center}
 \vspace{40mm}
@@ -85,8 +91,12 @@
 \newpage
 
 \include{sections/intro.tex}
+\include{sections/process.tex}
 \include{sections/requires.tex}
-\include{sections/design.tex}
+\include{sections/architecture-design.tex}
+\include{sections/detail-design.tex}
+\include{sections/implementation.tex}
+\include{sections/retrospective.tex}
 
 \bibliographystyle{plain}
 \bibliography{references}
