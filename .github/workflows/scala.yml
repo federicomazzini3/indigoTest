@@ -24,3 +24,11 @@ jobs:
       
     - name: Indigo build
       run: sbt buildGame
+      
+    - name: Publish game
+      uses: SamKirkland/FTP-Deploy-Action@4.1.0
+      with:
+        server: meblabs.com
+        username: ${{ secrets.ftp_admin }}
+        password: ${{ secrets.ftp_psw }}
+        local-dir: ./target/indigoBuild/
