@@ -32,3 +32,12 @@ jobs:
         username: ${{ secrets.ftp_admin }}
         password: ${{ secrets.ftp_psw }}
         local-dir: ./target/indigoBuild/
+        
+    - name: Release to Github Releases
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          title: Release - Latest Version
+          files: |
+            target/indigoBuild/*
+            report/index.pdf
