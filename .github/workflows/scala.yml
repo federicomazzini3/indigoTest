@@ -36,6 +36,7 @@ jobs:
     - name: Release to Github Releases
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
+          repo_token: "${{ secrets.TOKEN }}"
           title: Release - Latest Version
           files: |
             target/indigoBuild/*
