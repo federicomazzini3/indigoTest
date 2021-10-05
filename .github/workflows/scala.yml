@@ -34,9 +34,8 @@ jobs:
         local-dir: ./target/indigoBuild/
         
     - name: Release to Github Releases
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
           title: Release - Latest Version
           files: |
             target/indigoBuild/*
