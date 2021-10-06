@@ -30,6 +30,6 @@ jobs:
       with:
           repo_token: ${{ secrets.TOKEN }}
           title: Release - Latest Version
-          files: | 
+          files: |
             target/indigoBuild/*
             report/index.pdf
