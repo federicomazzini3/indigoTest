@@ -24,6 +24,11 @@ jobs:
       
     - name: Indigo build
       run: sbt buildGame
+      
+    - name: Zip site folder
+      uses: "montudor/action-zip@v1"
+      with:
+       args: zip -qq -r target.zip target/indigoBuild
     
     - name: Automatic Releases
       uses: "marvinpinto/action-automatic-releases@latest"
@@ -33,4 +38,5 @@ jobs:
           prerelease: false
           title: "Development Build"
           files: |
+            target.zip
             report/index.pdf
