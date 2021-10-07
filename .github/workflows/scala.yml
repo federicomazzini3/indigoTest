@@ -21,6 +21,13 @@ jobs:
         
     - name: Run tests
       run: sbt test
+    
+    - name: Build LaTeX report
+      uses: "xu-cheng/latex-action@v2"
+      with:
+        root_file: index.tex
+        args: '-output-format=pdf -file-line-error -synctex=1 -halt-on-error -interaction=nonstopmode -shell-escape'
+        working_directory: report
       
     - name: Indigo build
       run: sbt buildGameFull
