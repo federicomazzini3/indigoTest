@@ -23,12 +23,12 @@ jobs:
       run: sbt test
       
     - name: Indigo build
-      run: sbt buildGame
+      run: sbt buildGameFull
       
     - name: Zip site folder
       uses: "montudor/action-zip@v1"
       with:
-       args: zip -qq -r target.zip target/indigoBuild
+       args: zip -qq -r target.zip target/indigoBuildFull
     
     - name: Automatic Releases
       uses: "marvinpinto/action-automatic-releases@latest"
@@ -36,7 +36,7 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: false
-          title: "Development Build"
+          title: "Latest build"
           files: |
             target.zip
             report/index.pdf
