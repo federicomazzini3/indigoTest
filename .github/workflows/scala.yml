@@ -43,7 +43,7 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: false
-          title: "Latest build"
+          title: "Latest build" 
           files: |
             target.zip
             report/index.pdf
