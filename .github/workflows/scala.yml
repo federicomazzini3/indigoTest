@@ -24,12 +24,14 @@ jobs:
       
     - name: Indigo build
       run: sbt buildGame
-        
-    - name: Release to Github Releases
+    
+    - name: Automatic Releases
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
-          repo_token: ${{ secrets.TOKEN }}
-          title: Release - Latest Version
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "Development Build"
           files: |
             target/indigoBuild/*
             report/index.pdf
