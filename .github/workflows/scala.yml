@@ -33,5 +33,4 @@ jobs:
           prerelease: false
           title: "Development Build"
           files: |
-            target/indigoBuild
             report/index.pdf
